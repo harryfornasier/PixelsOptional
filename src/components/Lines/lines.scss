@@ -1,9 +1,12 @@
 .lines {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
   width: inherit;
   flex-grow: 1;
+  justify-content: flex-end;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
 
   &__line {
     border-radius: 5px;
