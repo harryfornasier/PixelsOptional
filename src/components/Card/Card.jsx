@@ -1,6 +1,5 @@
 export default function Card(postProp) {
   const post = postProp.post;
-  console.log(post.title);
   return (
     <section className="card">
       <div className="card__header-container">

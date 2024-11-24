@@ -10,3 +10,20 @@ export async function getPosts() {
 
   return response.data;
 }
+
+export async function postData(formData) {
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_TEST_URL}/posts`,
+      formData,
+      {
+        headers: {
+          "Content-Type": `multipart/form-data`,
+        },
+      }
+    );
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
