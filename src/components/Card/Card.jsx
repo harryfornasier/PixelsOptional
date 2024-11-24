@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function Card(postProp) {
   const post = postProp.post;
   return (
@@ -7,7 +9,9 @@ export default function Card(postProp) {
         <h3 className="card__date"></h3>
       </div>
       <div className="card__image-container">
-        <img src={post.image_url} alt="" className="card__img" />
+        <Link to={`/post/${post.id}`}>
+          <img src={post.image_url} alt="" className="card__img" />
+        </Link>
       </div>
       <div className="card__details-container">
         <p className="card__likes"></p>

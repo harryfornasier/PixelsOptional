@@ -14,8 +14,6 @@ export default function Home() {
     fetchPosts();
   }, []);
 
-  console.log(posts);
-
   if (!posts) {
     return <h1>Loading...</h1>;
   }
@@ -23,7 +21,7 @@ export default function Home() {
   return (
     <>
       {posts.map((post) => {
-        return <Card post={post} />;
+        return <Card key={post.id} post={post} />;
       })}
     </>
   );

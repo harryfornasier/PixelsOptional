@@ -11,7 +11,6 @@ export default function Upload() {
 
     formData.append("image", image);
     formData.append("title", title);
-    console.log(formData);
     postData(formData);
   }
 
