@@ -6,7 +6,8 @@ export default function Card(postProp) {
   const timeStampPattern = /(\d{4})-(\d{2})-(\d{2})T.*$/;
   const post = postProp.post;
   return (
-    <section className="card">
+    <div className="card__border">
+      <section className="card">
       <div className="card__header-container">
         <h3 className="card__title">{post.title}</h3>
         <Lines />
@@ -27,5 +28,6 @@ export default function Card(postProp) {
         <p className="card__camera"></p>
       </div>
     </section>
+    </div>
   );
 }

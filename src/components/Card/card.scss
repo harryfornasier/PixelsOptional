@@ -1,9 +1,16 @@
 .card {
-  background-color: #cacfcd;
-  border-radius: 5px;
+  background-color: #F7F1E3;
+  border: solid 5px #34332F;
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  &__border {
+    border-right: solid 3px #34332F;
+    border-bottom: solid 3px #34332F;;
+    border-radius: 5px;
+  }
 
   &__header-container {
     display: flex;
@@ -14,8 +21,6 @@
   }
   &__image-container {
     padding: 0.5rem;
-    // margin: 0.5rem;
-    // background-color: grey;
   }
   &__img {
     border: solid 4px black;
