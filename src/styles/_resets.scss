@@ -1,0 +1,25 @@
+// @use "./variables" as *;
+// @use "./mixins" as *;
+@use "./fonts" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Chicago", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  width: 100%;
+}

@@ -1,0 +1,12 @@
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: inherit;
+  flex-grow: 1;
+
+  &__line {
+    border-radius: 5px;
+    border-bottom: solid 3px black;
+  }
+}

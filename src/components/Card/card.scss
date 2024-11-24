@@ -1,0 +1,19 @@
+.card {
+  background-color: #fbe8e8;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__header-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+  }
+  &__img {
+    object-fit: contain;
+    width: 100%;
+    padding: 1rem;
+  }
+}

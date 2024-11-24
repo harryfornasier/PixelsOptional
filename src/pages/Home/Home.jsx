@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getData } from "../../utils/handleApi";
 import Card from "../../components/Card/Card";
+import "./home.scss";
 
 export default function Home() {
   const [posts, setPosts] = useState();
@@ -20,9 +21,11 @@ export default function Home() {
 
   return (
     <>
-      {posts.map((post) => {
-        return <Card key={post.id} post={post} />;
-      })}
+      <main className="main">
+        {posts.map((post) => {
+          return <Card key={post.id} post={post} />;
+        })}
+      </main>
     </>
   );
 }
