@@ -67,10 +67,11 @@
   flex-direction: column;
   border: solid 3px #34332f;
   border-radius: 5px;
-  background-color: #f2f1f0;
+  background-color: #e07a5f;
 }
 .card__camera-text, .card__camera-year {
   margin: 0;
+  color: white;
 }
 .card__camera-year {
   text-align: right;

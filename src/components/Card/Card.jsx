@@ -40,8 +40,6 @@ export default function Card(postProp) {
             </div>
             <p className="card__camera-year">{post.camera_year}</p>
           </div>
-
-          <p className="card__camera"></p>
         </div>
       </section>
     </div>

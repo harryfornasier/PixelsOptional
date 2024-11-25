@@ -75,12 +75,13 @@
     flex-direction: column;
     border: solid 3px #34332f;
     border-radius: 5px;
-    background-color: #f2f1f0;
+    background-color: #e07a5f;
   }
 
   &__camera-text,
   &__camera-year {
     margin: 0;
+    color: white;
   }
 
   &__camera-year {

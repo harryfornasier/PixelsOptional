@@ -24,24 +24,41 @@ export default function Upload() {
 
   return (
     <>
-      <h1>Upload images</h1>
-      <form className="form">
-        <img src={previewImage} alt="" />
-        <label htmlFor="file">Image Upload</label>
-        <input type="file" name="file" onChange={handleImage} />
-        <label htmlFor="" className="form__label">
-          Title
-        </label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        />
-        <button onClick={handleFormData}>Upload</button>
-      </form>
+      <main className="main">
+        {" "}
+        <h1>Upload images</h1>
+        <section className="photo__container-border">
+          <div className="photo__container">
+            <img src={previewImage} alt="" />
+          </div>
+        </section>
+        <form className="form">
+          <label htmlFor="file" className="form__input-file">
+            Image Upload
+          </label>
+          <input
+            className="form__file"
+            type="file"
+            id="file"
+            name="file"
+            onChange={handleImage}
+          />
+          <label htmlFor="title" className="form__label">
+            Title
+          </label>
+          <input
+            placeholder="Title"
+            className="form__input"
+            type="text"
+            name="title"
+            id="title"
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <button onClick={handleFormData}>Upload</button>
+        </form>
+      </main>
     </>
   );
 }

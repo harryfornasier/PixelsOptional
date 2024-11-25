@@ -12,7 +12,7 @@ body {
   font-family: "Chicago", Arial, Helvetica, sans-serif;
   font-style: normal;
   margin: 0;
-  background-color: #C2E6E1;
+  background-color: #c2e6e1;
 }
 
 ul {
@@ -27,4 +27,8 @@ html {
 
 h3 {
   margin: 0;
+}
+
+input[type="file"] {
+  display: none;
 }
