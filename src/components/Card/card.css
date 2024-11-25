@@ -17,6 +17,10 @@
   border-bottom: solid 3px #34332f;
   border-radius: 5px;
 }
+.card__icon {
+  width: 32px;
+  height: 32px;
+}
 .card__date {
   font-size: small;
   font-weight: 100;

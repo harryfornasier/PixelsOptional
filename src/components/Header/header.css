@@ -12,4 +12,13 @@
 .header__list {
   display: flex;
   justify-content: space-between;
+}
+.header__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header__icon {
+  width: 32px;
+  height: 32px;
 }/*# sourceMappingURL=header.css.map */

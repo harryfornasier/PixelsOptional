@@ -26,11 +26,11 @@ export default function Card(postProp) {
 
         <div className="card__details-container">
           <div className="card__like-container">
-            <img src={heart} width="20x" height="20px" alt="" />
+            <img src={heart} className="card__icon icon" alt="" />
             <p className="card__likes">{post.like}</p>
           </div>
           <div className="card__comment-container">
-            <img src={comment} width="20px" height="20px" alt="" />
+            <img src={comment} className="card__icon icon" alt="" />
             <p className="card__comments">{post.comment_count}</p>
           </div>
           <div className="card__camera-container">
