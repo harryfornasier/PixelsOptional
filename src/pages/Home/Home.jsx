@@ -9,6 +9,7 @@ export default function Home() {
   const fetchPosts = async () => {
     const response = await getData("/posts");
     setPosts(response);
+    console.log(response);
   };
 
   useEffect(() => {
