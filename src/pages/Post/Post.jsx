@@ -11,14 +11,13 @@ export default function Post() {
 
   useEffect(() => {
     (async () => {
-      const post = await getPost(id);
-      setPost(post.data.post.post[0]);
-      setComments(post.data.post.comments);
-      console.log(comments);
+      const response = await getPost(id);
+      setPost(response.data.post[0]);
+      setComments(response.data.post.comments);
     })();
   }, []);
 
-  if (!post || !comments) {
+  if (!post) {
     return <h1>Loading</h1>;
   }
 
@@ -31,9 +30,10 @@ export default function Post() {
       <div className="post__image-container">
         <img src={post.image_url} alt="" />
       </div>
-      {comments.map((comment) => {
-        return <Comment comment={comment} />;
-      })}
+      {comments &&
+        comments.map((comment) => {
+          return <Comment comment={comment} />;
+        })}
     </section>
   );
 }

@@ -46,7 +46,7 @@
   &__details-container {
     display: flex;
     padding: 0.5rem;
-    gap: 1rem;
+    justify-content: space-between;
   }
 
   &__like-container {
@@ -59,5 +59,28 @@
     display: flex;
     align-items: center;
     gap: 0.1rem;
+  }
+
+  &__camera-container {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    border: solid 3px #34332f;
+    border-radius: 5px;
+    background-color: #f2f1f0;
+  }
+
+  &__camera-text,
+  &__camera-year {
+    margin: 0;
+  }
+
+  &__camera-year {
+    text-align: right;
+  }
+
+  &__camera-divider {
+    display: flex;
+    gap: 0.5rem;
   }
 }

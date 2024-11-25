@@ -42,7 +42,7 @@
 .card__details-container {
   display: flex;
   padding: 0.5rem;
-  gap: 1rem;
+  justify-content: space-between;
 }
 .card__like-container {
   display: flex;
@@ -53,4 +53,22 @@
   display: flex;
   align-items: center;
   gap: 0.1rem;
+}
+.card__camera-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  border: solid 3px #34332f;
+  border-radius: 5px;
+  background-color: #f2f1f0;
+}
+.card__camera-text, .card__camera-year {
+  margin: 0;
+}
+.card__camera-year {
+  text-align: right;
+}
+.card__camera-divider {
+  display: flex;
+  gap: 0.5rem;
 }/*# sourceMappingURL=card.css.map */

@@ -31,7 +31,14 @@ export default function Card(postProp) {
           </div>
           <div className="card__comment-container">
             <img src={comment} width="20px" height="20px" alt="" />
-            <p className="card__comments">{post.comment}</p>
+            <p className="card__comments">{post.comment_count}</p>
+          </div>
+          <div className="card__camera-container">
+            <div className="card__camera-divider">
+              <p className="card__camera-text">{post.camera_brand}</p>
+              <p className="card__camera-text">{post.camera_model}</p>
+            </div>
+            <p className="card__camera-year">{post.camera_year}</p>
           </div>
 
           <p className="card__camera"></p>
