@@ -1,6 +1,9 @@
 .card {
   background-color: #f7f1e3;
-  border: solid 5px #34332f;
+  border-right: solid 5px #34332f;
+  border-bottom: solid 5px #34332f;
+  border-top: solid 3px #34332f;
+  border-left: solid 3px #34332f;
   border-radius: 5px 5px 0 5px;
 
   display: flex;
@@ -11,8 +14,8 @@
 
   &__border {
     margin: 0.5rem;
-    border-right: solid 5px #34332f;
-    border-bottom: solid 5px #34332f;
+    border-right: solid 3px #34332f;
+    border-bottom: solid 3px #34332f;
     border-radius: 5px;
   }
 

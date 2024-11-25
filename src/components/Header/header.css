@@ -1,0 +1,15 @@
+.header {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #f7f1e3;
+  padding: 1rem;
+  border-right: solid 3px #34332f;
+  border-bottom: solid 3px #34332f;
+  border-left: solid 3px #34332f;
+  border-radius: 0 0 5px 5px;
+  margin-bottom: 2rem;
+}
+.header__list {
+  display: flex;
+  justify-content: space-between;
+}/*# sourceMappingURL=header.css.map */
