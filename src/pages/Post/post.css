@@ -23,4 +23,20 @@
   border-right: solid 5px #34332f;
   border-bottom: solid 5px #34332f;
   border-radius: 5px;
+}
+
+.form-comment__container {
+  display: flex;
+  gap: 0.5rem;
+  height: 5rem;
+}
+.form-comment__button {
+  flex-grow: 1;
+  border: solid 5px #34332f;
+  border-radius: 5px;
+}
+.form-comment__input {
+  flex-grow: 2;
+  border: solid 5px #34332f;
+  border-radius: 5px;
 }/*# sourceMappingURL=post.css.map */

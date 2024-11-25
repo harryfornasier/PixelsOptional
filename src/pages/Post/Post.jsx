@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Comment from "../../components/Comment/Comment";
 import "./post.scss";
 import { sendComment } from "../../utils/handleApi";
+import CardDetails from "../../components/CardDetails/CardDetails";
 
 export default function Post() {
   const { id } = useParams();
@@ -48,22 +49,25 @@ export default function Post() {
           <div className="post__image-container">
             <img className="post__image" src={post.image_url} alt="" />
           </div>
+          <CardDetails post={post} />
         </section>
       </div>
       <form className="form-comment" action="">
         <label htmlFor="" className="form-comment__label">
           Comment
         </label>
-        <textarea
-          type="text"
-          className="form-comment__input"
-          onChange={(e) => {
-            setPostComment(e.target.value);
-          }}
-        />
-        <button onClick={handleComment} className="form-comment__button">
-          Post
-        </button>
+        <div className="form-comment__container">
+          <textarea
+            type="text"
+            className="form-comment__input"
+            onChange={(e) => {
+              setPostComment(e.target.value);
+            }}
+          />
+          <button onClick={handleComment} className="form-comment__button">
+            Post
+          </button>
+        </div>
       </form>
       {comments.map((comment) => {
         return <Comment comment={comment} />;
