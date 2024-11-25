@@ -1,7 +1,10 @@
+import "./comment.scss";
+
 export default function Comment({ comment }) {
+  console.log(comment);
   return (
     <section className="comment">
-      <h2 className="comment__text">{comment.comment}</h2>
+      <p className="comment__text">{comment.text}</p>
     </section>
   );
 }

@@ -5,7 +5,6 @@ import "./upload.scss";
 export default function Upload() {
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState(null);
-  const [sentImage, setSentImage] = useState("");
   const [title, setTitle] = useState("");
 
   function handleFormData() {
@@ -26,38 +25,38 @@ export default function Upload() {
     <>
       <main className="main">
         {" "}
-        <h1>Upload images</h1>
+        <h1>Upload image</h1>
+        <label htmlFor="title" className="form__label">
+          Title
+        </label>
+        <input
+          placeholder="Title"
+          className="form__input"
+          type="text"
+          name="title"
+          id="title"
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
         <section className="photo__container-border">
           <div className="photo__container">
             <img src={previewImage} alt="" />
+            <label htmlFor="file" className="form__input-file">
+              Add photo
+            </label>
+            <input
+              className="form__file"
+              type="file"
+              id="file"
+              name="file"
+              onChange={handleImage}
+            />
           </div>
         </section>
-        <form className="form">
-          <label htmlFor="file" className="form__input-file">
-            Image Upload
-          </label>
-          <input
-            className="form__file"
-            type="file"
-            id="file"
-            name="file"
-            onChange={handleImage}
-          />
-          <label htmlFor="title" className="form__label">
-            Title
-          </label>
-          <input
-            placeholder="Title"
-            className="form__input"
-            type="text"
-            name="title"
-            id="title"
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-          <button onClick={handleFormData}>Upload</button>
-        </form>
+        <button className="form__button" onClick={handleFormData}>
+          Upload
+        </button>
       </main>
     </>
   );

@@ -15,6 +15,9 @@
      object-fit: contain;
   width: 100%;
 }
+.post__image-container {
+  padding: 0.5rem;
+}
 .post__border {
   margin: 0.5rem;
   border-right: solid 5px #34332f;

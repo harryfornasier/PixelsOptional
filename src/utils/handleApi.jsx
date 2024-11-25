@@ -16,6 +16,11 @@ export async function getPost(id) {
   return post;
 }
 
+export async function sendComment(data) {
+  const response = axios.post(`${import.meta.env.VITE_BASE_URL}/comments`, data);
+  return response;
+}
+
 export async function postData(formData) {
   try {
     const response = await axios.post(

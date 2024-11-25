@@ -1,3 +1,4 @@
+import Loading from "../../components/Loading/Loading";
 import { useEffect, useState } from "react";
 import { getData } from "../../utils/handleApi";
 import Card from "../../components/Card/Card";
@@ -9,7 +10,6 @@ export default function Home() {
   const fetchPosts = async () => {
     const response = await getData("/posts");
     setPosts(response);
-    console.log(response);
   };
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function Home() {
   }, []);
 
   if (!posts) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   return (
