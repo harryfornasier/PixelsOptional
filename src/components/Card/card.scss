@@ -42,6 +42,12 @@
   &__title {
     font-size: small;
     font-weight: 400;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 
   &__header-container {

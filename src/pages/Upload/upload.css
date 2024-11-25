@@ -54,4 +54,15 @@
   border-right: solid 3px #34332f;
   border-bottom: solid 3px #34332f;
   border-radius: 5px;
+}
+
+.upload__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media screen and (min-width: 80rem) {
+  .upload__container {
+    flex-direction: row;
+  }
 }/*# sourceMappingURL=upload.css.map */

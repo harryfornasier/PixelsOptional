@@ -22,10 +22,9 @@ export default function Upload() {
   }
 
   return (
-    <>
-      <main className="main">
-        {" "}
-        <h1>Upload image</h1>
+    <section className="upload">
+      <h1>Upload image</h1>
+      <div className="upload__container">
         <label htmlFor="title" className="form__label">
           Title
         </label>
@@ -57,7 +56,7 @@ export default function Upload() {
         <button className="form__button" onClick={handleFormData}>
           Upload
         </button>
-      </main>
-    </>
+      </div>
+    </section>
   );
 }

@@ -11,7 +11,7 @@
   margin-top: -0.2rem;
   margin-left: -0.2rem;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 80rem) {
   .card {
     height: 101%;
   }
@@ -22,7 +22,7 @@
   border-bottom: solid 3px #34332f;
   border-radius: 5px;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 80rem) {
   .card__border {
     width: 30%;
   }
@@ -38,6 +38,12 @@
 .card__title {
   font-size: small;
   font-weight: 400;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .card__header-container {
   display: flex;

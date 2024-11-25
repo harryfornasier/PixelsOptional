@@ -52,26 +52,28 @@ export default function Post() {
           <CardDetails post={post} />
         </section>
       </div>
-      <form className="form-comment" action="">
-        <label htmlFor="" className="form-comment__label">
-          Comment
-        </label>
-        <div className="form-comment__container">
-          <textarea
-            type="text"
-            className="form-comment__input"
-            onChange={(e) => {
-              setPostComment(e.target.value);
-            }}
-          />
-          <button onClick={handleComment} className="form-comment__button">
-            Post
-          </button>
-        </div>
-      </form>
-      {comments.map((comment) => {
-        return <Comment comment={comment} />;
-      })}
+      <div className="post__divider">
+        <form className="form-comment" action="">
+          <label htmlFor="" className="form-comment__label">
+            Comment
+          </label>
+          <div className="form-comment__container">
+            <textarea
+              type="text"
+              className="form-comment__input"
+              onChange={(e) => {
+                setPostComment(e.target.value);
+              }}
+            />
+            <button onClick={handleComment} className="form-comment__button">
+              Post
+            </button>
+          </div>
+        </form>
+        {comments.map((comment) => {
+          return <Comment key={comment.id} comment={comment} />;
+        })}
+      </div>
     </main>
   );
 }
