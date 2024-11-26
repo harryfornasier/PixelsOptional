@@ -4,6 +4,9 @@ import Upload from "./pages/Upload/Upload.jsx";
 import Post from "./pages/Post/Post.jsx";
 import "./app.scss";
 import Header from "./components/Header/Header.jsx";
+import Login from "./pages/Login/Login.jsx";
+import Register from "./pages/Register/Register.jsx";
+import Profile from "./pages/Profile/Profile.jsx";
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/post/:id" element={<Post />} />
+          <Route path="/users/login" element={<Login />} />
+          <Route path="/users/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>

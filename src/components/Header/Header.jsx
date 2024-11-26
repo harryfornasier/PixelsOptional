@@ -22,10 +22,18 @@ export default function Header() {
             </div>
             <li className="header__item">Upload</li>
           </NavLink>
-          <div className="header__container">
-            <img src={profile} alt="" className="header__icon icon" />
-            <li className="header__item">Profile</li>
-          </div>
+          <NavLink to={"/users/login"}>
+            <div className="header__container">
+              <img src={profile} alt="" className="header__icon icon" />
+              <li className="header__item">Login</li>
+            </div>
+          </NavLink>
+          <NavLink to={"/users/register"}>
+            <div className="header__container">
+              <img src={profile} alt="" className="header__icon icon" />
+              <li className="header__item">Register</li>
+            </div>
+          </NavLink>
         </ul>
       </header>
     </>
