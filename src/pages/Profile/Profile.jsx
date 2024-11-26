@@ -13,7 +13,7 @@ export default function Profile() {
     const authToken = localStorage.getItem("authToken");
 
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_TEST_URL}/users/profile`, {
+      const { data } = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/profile`, {
         headers: {
           authorisation: `Bearer ${authToken}`,
         },

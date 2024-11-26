@@ -22,7 +22,7 @@ export default function Login() {
     }
 
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_TEST_URL}/users/login`, {
+      const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, {
         email: formData.email,
         password: formData.password,
       });

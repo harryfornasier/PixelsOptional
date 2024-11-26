@@ -24,7 +24,7 @@ export default function Register() {
     }
 
     try {
-      await axios.post(`${import.meta.env.VITE_TEST_URL}/users/register`, {
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, {
         name: formData.name,
         email: formData.email,
         password: formData.password,

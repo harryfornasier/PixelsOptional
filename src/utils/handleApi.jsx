@@ -22,6 +22,7 @@ export async function sendComment(data) {
 }
 
 export async function postData(formData) {
+  const authToken = localStorage.getItem("authToken");
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_BASE_URL}/posts`,
@@ -29,6 +30,7 @@ export async function postData(formData) {
       {
         headers: {
           "Content-Type": `multipart/form-data`,
+          authorisation: `Bearer ${authToken}`,
         },
       }
     );
