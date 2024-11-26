@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import Card from "../../components/Card/Card";
 
 export default function Profile() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [posts, setPosts] = useState([]);
   const [userData, setUserData] = useState({});
 
   const getUserData = async () => {
@@ -18,6 +20,7 @@ export default function Profile() {
       });
 
       setUserData(data.user);
+      setPosts(data.posts);
       setIsLoading(false);
     } catch (error) {
       if (error.status === 401) {
@@ -40,12 +43,21 @@ export default function Profile() {
     <main>
       {isLoading && <h1>Loading...</h1>}
       {!isLoading && !error && (
-        <section>
-          <h1>Welcome</h1>
-          <p>Name: {userData.name}</p>
-          <p>Email: {userData.email}</p>
-          <button onClick={handleLogout}>Logout</button>
-        </section>
+        <>
+          <section>
+            <h1>Welcome</h1>
+            <p>Name: {userData.name}</p>
+            <p>Email: {userData.email}</p>
+            <button onClick={handleLogout}>Logout</button>
+          </section>
+
+          <section>
+            <h2>Posts</h2>
+            {posts.map((post) => {
+              return <Card post={post}></Card>;
+            })}
+          </section>
+        </>
       )}
       {error && <p>{error}</p>}
     </main>
