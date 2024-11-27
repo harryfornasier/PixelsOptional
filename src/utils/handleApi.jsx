@@ -34,7 +34,7 @@ export async function postData(formData) {
         },
       }
     );
-    console.log(response);
+    return response.data.newPost[0];
   } catch (error) {
     console.log(error);
   }

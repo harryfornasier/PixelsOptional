@@ -4,7 +4,7 @@ import home from "../../assets/icons/home.png";
 import upload from "../../assets/icons/upload.png";
 import profile from "../../assets/icons/profile.png";
 
-export default function Header() {
+export default function Header(loggedIn) {
   return (
     <>
       <header className="header">
@@ -22,18 +22,30 @@ export default function Header() {
             </div>
             <li className="header__item">Upload</li>
           </NavLink>
-          <NavLink to={"/users/login"}>
-            <div className="header__container">
-              <img src={profile} alt="" className="header__icon icon" />
-              <li className="header__item">Login</li>
-            </div>
-          </NavLink>
-          <NavLink to={"/users/register"}>
-            <div className="header__container">
-              <img src={profile} alt="" className="header__icon icon" />
-              <li className="header__item">Register</li>
-            </div>
-          </NavLink>
+          {!loggedIn ? (
+            <NavLink to={"/users/login"}>
+              <div className="header__container">
+                <img src={profile} alt="" className="header__icon icon" />
+                <li className="header__item">Login</li>
+              </div>
+            </NavLink>
+          ) : (
+            <NavLink to={"/profile"}>
+              <div className="header__container">
+                <img src={profile} alt="" className="header__icon icon" />
+                <li className="header__item">Profile</li>
+              </div>
+            </NavLink>
+          )}
+
+          {!loggedIn && (
+            <NavLink to={"/users/register"}>
+              <div className="header__container">
+                <img src={profile} alt="" className="header__icon icon" />
+                <li className="header__item">Register</li>
+              </div>
+            </NavLink>
+          )}
         </ul>
       </header>
     </>

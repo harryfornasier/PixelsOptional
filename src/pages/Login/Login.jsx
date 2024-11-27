@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export default function Login() {
+export default function Login(setloggedIn) {
   const [errorMessage, setErrorMessage] = useState();
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -31,6 +31,7 @@ export default function Login() {
       localStorage.setItem("authToken", data.authToken);
 
       setSuccess(true);
+      setloggedIn(true);
     } catch (error) {
       setErrorMessage(error.response.data.message);
     }

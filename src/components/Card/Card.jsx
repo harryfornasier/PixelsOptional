@@ -22,7 +22,10 @@ export default function Card(postProp) {
           </Link>
         </div>
         <div className="card__author-container">
-          <p className="card__author">{`By ${post.name}`}</p>
+          <Link to={`/profile/${post.user_id}`}>
+            <img src="" alt="" />
+            <p className="card__author">{post.name}</p>
+          </Link>
         </div>
         <CardDetails post={post} />
       </section>

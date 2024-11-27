@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import Home from "./pages/Home/Home.jsx";
 const LazyHome = lazy(() => import("./pages/Home/Home.jsx"));
@@ -10,20 +10,31 @@ import Login from "./pages/Login/Login.jsx";
 import Register from "./pages/Register/Register.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import ProfileView from "./pages/ProfileView/ProfileView.jsx";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    if (authToken) {
+      setLoggedIn(true);
+    }
+  }, []);
+
   return (
     <>
       <BrowserRouter>
-        <Header />
+        <Header loggedIn={loggedIn} />
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<LazyHome />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/post/:id" element={<Post />} />
-          <Route path="/users/login" element={<Login />} />
+          <Route path="/users/login" element={<Login setLoggedIn={setLoggedIn} />} />
           <Route path="/users/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<ProfileView />}></Route>
         </Routes>
       </BrowserRouter>
     </>

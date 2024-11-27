@@ -36,7 +36,6 @@ export default function Profile() {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
-    navigate("/");
   };
 
   return (

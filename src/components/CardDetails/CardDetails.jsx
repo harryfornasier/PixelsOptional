@@ -16,7 +16,9 @@ export default function CardDetails({ post }) {
 
         <div className="card__camera-container">
           <div className="card__camera-divider">
-            <p className="card__camera-text">{post.camera_brand}</p>
+            <p className="card__camera-text">
+              {post.camera_brand ? post.camera_brand : post.camera}
+            </p>
             <p className="card__camera-text">{post.camera_model}</p>
           </div>
           <p className="card__camera-year">{post.camera_year}</p>

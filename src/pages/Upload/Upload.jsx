@@ -1,4 +1,5 @@
 import { postData } from "../../utils/handleApi";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 import "./upload.scss";
 
@@ -6,13 +7,15 @@ export default function Upload() {
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState(null);
   const [title, setTitle] = useState("");
+  const navigate = useNavigate();
 
-  function handleFormData() {
+  async function handleFormData() {
     const formData = new FormData();
 
     formData.append("image", image);
     formData.append("title", title);
-    postData(formData);
+    const response = await postData(formData);
+    navigate(`/post/${response}`);
   }
 
   function handleImage(event) {
@@ -25,22 +28,28 @@ export default function Upload() {
     <section className="upload">
       <h1>Upload image</h1>
       <div className="upload__container">
-        <label htmlFor="title" className="form__label">
-          Title
-        </label>
-        <input
-          placeholder="Title"
-          className="form__input"
-          type="text"
-          name="title"
-          id="title"
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        />
+        <section className="upload__section">
+          <label htmlFor="title" className="form__label">
+            Title
+          </label>
+          <input
+            placeholder="Title"
+            className="form__input"
+            type="text"
+            name="title"
+            id="title"
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <button className="form__button form__button--desktop" onClick={handleFormData}>
+            Upload
+          </button>
+        </section>
         <section className="photo__container-border">
           <div className="photo__container">
-            <img src={previewImage} alt="" />
+            {previewImage && <img className="photo__photo" src={previewImage} alt="" />}
+
             <label htmlFor="file" className="form__input-file">
               Add photo
             </label>
@@ -53,7 +62,7 @@ export default function Upload() {
             />
           </div>
         </section>
-        <button className="form__button" onClick={handleFormData}>
+        <button className="form__button form__button--mobile" onClick={handleFormData}>
           Upload
         </button>
       </div>
