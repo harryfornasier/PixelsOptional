@@ -1,7 +1,10 @@
+import { lazy, Suspense } from "react";
 import Loading from "../../components/Loading/Loading";
 import { useEffect, useState } from "react";
 import { getData } from "../../utils/handleApi";
 import Card from "../../components/Card/Card";
+const LazyCard = lazy(() => import("../../components/Card/Card"));
+
 import "./home.scss";
 
 export default function Home() {
@@ -16,16 +19,16 @@ export default function Home() {
     fetchPosts();
   }, []);
 
-  if (!posts) {
-    return <Loading />;
-  }
-
   return (
     <>
       <main className="main">
-        {posts.map((post) => {
-          return <Card key={post.id} post={post} />;
-        })}
+        {posts && (
+          <Suspense fallback={<Loading />}>
+            {posts.map((post) => {
+              return <LazyCard key={post.id} post={post} />;
+            })}
+          </Suspense>
+        )}
       </main>
     </>
   );

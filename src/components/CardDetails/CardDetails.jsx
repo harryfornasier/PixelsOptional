@@ -13,9 +13,7 @@ export default function CardDetails({ post }) {
           <img src={comment} className="card__icon icon" alt="" />
           <p className="card__comments">{post.comment_count}</p>
         </div>
-        <div className="card__author-container">
-          <p className="card__author">{post.name}</p>
-        </div>
+
         <div className="card__camera-container">
           <div className="card__camera-divider">
             <p className="card__camera-text">{post.camera_brand}</p>

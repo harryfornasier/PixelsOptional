@@ -16,13 +16,14 @@ export default function Card(postProp) {
             {post.created_at.replace(timeStampPattern, "$3/$2/$1")}
           </h3>
         </div>
-
         <div className="card__image-container">
           <Link to={`/post/${post.id}`}>
             <img src={post.image_url} alt="" className="card__img" />
           </Link>
         </div>
-
+        <div className="card__author-container">
+          <p className="card__author">{`By ${post.name}`}</p>
+        </div>
         <CardDetails post={post} />
       </section>
     </div>

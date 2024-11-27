@@ -1,5 +1,7 @@
+import { lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import Home from "./pages/Home/Home.jsx";
+const LazyHome = lazy(() => import("./pages/Home/Home.jsx"));
 import Upload from "./pages/Upload/Upload.jsx";
 import Post from "./pages/Post/Post.jsx";
 import "./app.scss";
@@ -16,7 +18,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<LazyHome />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/post/:id" element={<Post />} />
           <Route path="/users/login" element={<Login />} />
