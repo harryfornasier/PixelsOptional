@@ -1,12 +1,13 @@
 import Loading from "../../components/Loading/Loading";
 import { useParams } from "react-router";
-import { getPost } from "../../utils/handleApi";
+import { getData, getPost } from "../../utils/handleApi";
 import { useState } from "react";
 import { useEffect } from "react";
 import Comment from "../../components/Comment/Comment";
 import "./post.scss";
 import { sendComment } from "../../utils/handleApi";
 import CardDetails from "../../components/CardDetails/CardDetails";
+import { getComments } from "../../utils/handleApi";
 
 export default function Post() {
   const { id } = useParams();
@@ -19,22 +20,27 @@ export default function Post() {
     const comment = {
       postId: id,
       comment: postComment,
-      userId: 1,
     };
     sendComment(comment);
   }
 
   async function setData() {
     const response = await getPost(id);
+    const commentResponse = await getComments(id);
     setPost(response.data.post[0]);
-    setComments(response.data.post[0].comments);
+
+    if (commentResponse.status === 204) {
+      setComments([""]);
+    } else {
+      setComments(commentResponse.data.comments);
+    }
   }
 
   useEffect(() => {
     setData();
   }, []);
 
-  if (!post || !comments) {
+  if (!post) {
     return <Loading />;
   }
 
@@ -70,9 +76,13 @@ export default function Post() {
             </button>
           </div>
         </form>
-        {comments.map((comment) => {
-          return <Comment key={comment.id} comment={comment} />;
-        })}
+        {comments.length ? (
+          comments.map((comment) => {
+            return <Comment key={comment.id} comment={comment} />;
+          })
+        ) : (
+          <Loading />
+        )}
       </div>
     </main>
   );

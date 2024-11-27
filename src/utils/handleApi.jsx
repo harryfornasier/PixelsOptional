@@ -16,9 +16,23 @@ export async function getPost(id) {
   return post;
 }
 
+export async function getComments(id) {
+  const comments = await axios.get(`${import.meta.env.VITE_BASE_URL}/comments/${id}`);
+  return comments;
+}
+
 export async function sendComment(data) {
-  const response = axios.post(`${import.meta.env.VITE_BASE_URL}/comments`, data);
-  return response;
+  const authToken = localStorage.getItem("authToken");
+  try {
+    const response = axios.post(`${import.meta.env.VITE_BASE_URL}/comments`, data, {
+      headers: {
+        authorisation: `Bearer ${authToken}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function postData(formData) {
