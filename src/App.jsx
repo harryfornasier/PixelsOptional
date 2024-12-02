@@ -28,12 +28,12 @@ function App() {
         <Header loggedIn={loggedIn} />
         <Routes>
           <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<LazyHome />} />
+          <Route path="/:id" element={<LazyHome />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/post/:id" element={<Post />} />
           <Route path="/users/login" element={<Login setLoggedIn={setLoggedIn} />} />
           <Route path="/users/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile setLoggedIn={setLoggedIn} />} />
           <Route path="/profile/:id" element={<ProfileView />}></Route>
         </Routes>
       </BrowserRouter>

@@ -5,10 +5,14 @@ export async function getData(endpoint) {
   return response.data;
 }
 
-export async function getPosts() {
-  const posts = await axios.get(`${import.meta.env.VITE_BASE_URL}/posts`);
-
-  return response.data;
+export async function getPosts(pageNum) {
+  console.log(pageNum);
+  const posts = await axios.get(`${import.meta.env.VITE_BASE_URL}/posts`, {
+    params: {
+      page: pageNum,
+    },
+  });
+  return posts.data;
 }
 
 export async function getPost(id) {

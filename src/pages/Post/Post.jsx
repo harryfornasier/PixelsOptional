@@ -53,7 +53,7 @@ export default function Post() {
             <h1 className="post__date">{post.date}</h1>
           </div>
           <div className="post__image-container">
-            <img className="post__image" src={post.image_url} alt="" />
+            <img loading="lazy" className="post__image" src={post.image_url} alt="" />
           </div>
           <CardDetails post={post} />
         </section>

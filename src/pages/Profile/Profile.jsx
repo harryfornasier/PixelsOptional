@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Card from "../../components/Card/Card";
 
-export default function Profile() {
+export default function Profile(setLoggedIn) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [posts, setPosts] = useState([]);
@@ -36,6 +36,7 @@ export default function Profile() {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    setLoggedIn(false);
   };
 
   return (

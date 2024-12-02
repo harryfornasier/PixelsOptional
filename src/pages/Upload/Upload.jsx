@@ -15,7 +15,7 @@ export default function Upload() {
     formData.append("image", image);
     formData.append("title", title);
     const response = await postData(formData);
-    navigate(`/post/${response}`);
+    //navigate(`/post/${response}`);
   }
 
   function handleImage(event) {
