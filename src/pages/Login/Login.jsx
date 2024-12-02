@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export default function Login(setloggedIn) {
+export default function Login({ setloggedIn }) {
   const [errorMessage, setErrorMessage] = useState();
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({

@@ -30,7 +30,7 @@ export default function ProfileView() {
       <section>
         <h2>User Posts</h2>
         {userData.posts.map((post) => {
-          return <Card post={post}></Card>;
+          return <Card key={post.id} post={post} />;
         })}
       </section>
     </>

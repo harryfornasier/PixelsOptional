@@ -22,6 +22,7 @@ export default function Post() {
       comment: postComment,
     };
     sendComment(comment);
+    setData();
   }
 
   async function setData() {
@@ -76,9 +77,9 @@ export default function Post() {
             </button>
           </div>
         </form>
-        {comments.length ? (
+        {comments ? (
           comments.map((comment) => {
-            return <Comment key={comment.id} comment={comment} />;
+            return <Comment key={comment.id ? comment.id : 1} comment={comment} />;
           })
         ) : (
           <Loading />

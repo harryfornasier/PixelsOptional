@@ -6,7 +6,6 @@ export async function getData(endpoint) {
 }
 
 export async function getPosts(pageNum) {
-  console.log(pageNum);
   const posts = await axios.get(`${import.meta.env.VITE_BASE_URL}/posts`, {
     params: {
       page: pageNum,

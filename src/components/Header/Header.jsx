@@ -4,7 +4,7 @@ import home from "../../assets/icons/home.png";
 import upload from "../../assets/icons/upload.png";
 import profile from "../../assets/icons/profile.png";
 
-export default function Header(loggedIn) {
+export default function Header({ loggedIn }) {
   return (
     <>
       <header className="header">
