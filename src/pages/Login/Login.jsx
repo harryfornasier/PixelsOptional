@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login({ setloggedIn }) {
   const [errorMessage, setErrorMessage] = useState();
@@ -30,10 +31,10 @@ export default function Login({ setloggedIn }) {
       localStorage.setItem("userId", data.id);
       localStorage.setItem("authToken", data.authToken);
 
-      setSuccess(true);
       setloggedIn(true);
+      setSuccess(true);
     } catch (error) {
-      setErrorMessage(error.response.data.message);
+      setErrorMessage(error.response);
     }
   };
 

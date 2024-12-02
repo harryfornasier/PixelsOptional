@@ -56,6 +56,10 @@
     flex-grow: 1;
     border: solid 5px #34332f;
     border-radius: 5px;
+
+    &:hover {
+      background-color: #e07a5f;
+    }
   }
 
   &__input {

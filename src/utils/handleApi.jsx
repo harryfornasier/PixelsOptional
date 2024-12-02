@@ -53,6 +53,20 @@ export async function postData(formData) {
     );
     return response.data.newPost[0];
   } catch (error) {
-    console.log(error);
+    return error;
   }
+}
+
+export async function patchLike(postId, foreignUserId) {
+  const authToken = localStorage.getItem("authToken");
+  const response = axios.patch(
+    `${import.meta.env.VITE_BASE_URL}/posts/${postId}`,
+    { foreignUser: foreignUserId },
+    {
+      headers: {
+        authorisation: `Bearer ${authToken}`,
+      },
+    }
+  );
+  return response;
 }

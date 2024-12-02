@@ -8,21 +8,27 @@ import "./post.scss";
 import { sendComment } from "../../utils/handleApi";
 import CardDetails from "../../components/CardDetails/CardDetails";
 import { getComments } from "../../utils/handleApi";
+import badBart from "../../assets/icons/bad-bart-icon.png";
 
-export default function Post() {
+export default function Post({ loggedIn }) {
   const { id } = useParams();
   const [post, setPost] = useState("");
   const [comments, setComments] = useState("");
   const [postComment, setPostComment] = useState("");
+  const [error, setError] = useState("");
 
   function handleComment(event) {
     event.preventDefault();
-    const comment = {
-      postId: id,
-      comment: postComment,
-    };
-    sendComment(comment);
-    setData();
+    if (loggedIn) {
+      const comment = {
+        postId: id,
+        comment: postComment,
+      };
+      sendComment(comment);
+      setData();
+    } else {
+      setError(`Howdy, you gotta login before you post a comment`);
+    }
   }
 
   async function setData() {
@@ -76,6 +82,12 @@ export default function Post() {
               Post
             </button>
           </div>
+          {error && (
+            <section className="error">
+              <img src={badBart} alt="" />
+              <p>{error}</p>
+            </section>
+          )}
         </form>
         {comments ? (
           comments.map((comment) => {

@@ -1,14 +1,21 @@
 import heart from "../../assets/icons/heart.png";
 import comment from "../../assets/icons/comment.png";
+import axios from "axios";
+import { patchLike } from "../../utils/handleApi.jsx";
 
 export default function CardDetails({ post }) {
+  async function handleLike() {
+    const response = await patchLike(post.id, post.user_id);
+    console.log(response);
+  }
+
   return (
     <>
       <div className="card__details-container">
-        <div className="card__like-container">
+        <button onClick={handleLike} className="card__like-container">
           <img src={heart} className="card__icon icon" alt="" />
           <p className="card__likes">{post.like}</p>
-        </div>
+        </button>
         <div className="card__comment-container">
           <img src={comment} className="card__icon icon" alt="" />
           <p className="card__comments">{post.comment_count}</p>
