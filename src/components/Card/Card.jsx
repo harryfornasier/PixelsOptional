@@ -3,9 +3,8 @@ import "./card.scss";
 import Lines from "../Lines/Lines";
 import CardDetails from "../CardDetails/CardDetails";
 
-export default function Card(postProp) {
+export default function Card({ post, fetchPosts }) {
   const timeStampPattern = /(\d{4})-(\d{2})-(\d{2})T.*$/;
-  const post = postProp.post;
   return (
     <div className="card__border">
       <section className="card">
@@ -27,7 +26,7 @@ export default function Card(postProp) {
             <p className="card__author">{post.name}</p>
           </Link>
         </div>
-        <CardDetails post={post} />
+        <CardDetails fetchPosts={fetchPosts} post={post} />
       </section>
     </div>
   );

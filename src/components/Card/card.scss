@@ -77,6 +77,10 @@
     display: flex;
     align-items: center;
     gap: 0.1rem;
+
+    &--active {
+      background-color: #e07a5f;
+    }
   }
 
   &__comment-container {

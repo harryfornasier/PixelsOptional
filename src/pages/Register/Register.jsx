@@ -24,16 +24,20 @@ export default function Register() {
     }
 
     try {
-      await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/users/register`,
+        {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
 
       setErrorMessage("");
       setSuccess(true);
     } catch (error) {
-      setErrorMessage(error.message);
+      console.log(error);
+      setErrorMessage(error.response.data.msg);
     }
   };
 

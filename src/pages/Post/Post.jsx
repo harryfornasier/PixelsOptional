@@ -9,8 +9,11 @@ import { sendComment } from "../../utils/handleApi";
 import CardDetails from "../../components/CardDetails/CardDetails";
 import { getComments } from "../../utils/handleApi";
 import badBart from "../../assets/icons/bad-bart-icon.png";
+import { deletePost } from "../../utils/handleApi";
 
 export default function Post({ loggedIn }) {
+  const timeStampPattern = /(\d{4})-(\d{2})-(\d{2})T.*$/;
+  const admin = localStorage.getItem("admin");
   const { id } = useParams();
   const [post, setPost] = useState("");
   const [comments, setComments] = useState("");
@@ -25,17 +28,20 @@ export default function Post({ loggedIn }) {
         comment: postComment,
       };
       sendComment(comment);
-      setData();
+      setComments();
     } else {
       setError(`Howdy, you gotta login before you post a comment`);
     }
   }
 
-  async function setData() {
-    const response = await getPost(id);
+  async function handleCommentApi() {
     const commentResponse = await getComments(id);
-    setPost(response.data.post[0]);
 
+    console.log(commentResponse);
+
+    //Checks if no one has posted a comment
+    //Set Comment to an empty string within an array so map does not fail
+    //In comments component "no comment" message is
     if (commentResponse.status === 204) {
       setComments([""]);
     } else {
@@ -43,8 +49,19 @@ export default function Post({ loggedIn }) {
     }
   }
 
+  async function hanldePostApi() {
+    const response = await getPost(id);
+    setPost(response.data.post[0]);
+  }
+
+  async function handleDelete() {
+    const response = await deletePost(id);
+    console.log(response);
+  }
+
   useEffect(() => {
-    setData();
+    hanldePostApi();
+    handleCommentApi();
   }, []);
 
   if (!post) {
@@ -53,14 +70,28 @@ export default function Post({ loggedIn }) {
 
   return (
     <main className="main">
-      <div className="post__border">
+      <div
+        className={
+          post.landscape ? "post__border" : "post__border post__border--portrait"
+        }
+      >
         <section className="post">
           <div className="post__title-container">
             <h1 className="post__title">{post.title}</h1>
-            <h1 className="post__date">{post.date}</h1>
+            <h3 className="post__date">
+              {post.created_at.replace(timeStampPattern, "$3/$2/$1")}
+            </h3>
           </div>
+          {admin == 1 && <button onClick={handleDelete}>Delete</button>}
           <div className="post__image-container">
-            <img loading="lazy" className="post__image" src={post.image_url} alt="" />
+            <img
+              loading="lazy"
+              className={
+                post.landscape ? "post__image" : "post__image post__image--portrait"
+              }
+              src={post.image_url}
+              alt=""
+            />
           </div>
           <CardDetails post={post} />
         </section>

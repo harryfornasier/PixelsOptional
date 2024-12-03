@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login({ setloggedIn }) {
+export default function Login({ setLoggedIn }) {
   const [errorMessage, setErrorMessage] = useState();
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -31,10 +31,16 @@ export default function Login({ setloggedIn }) {
       localStorage.setItem("userId", data.id);
       localStorage.setItem("authToken", data.authToken);
 
-      setloggedIn(true);
+      if (data.admin > 0) {
+        localStorage.setItem("admin", data.admin);
+      }
+
+      setLoggedIn(true);
       setSuccess(true);
     } catch (error) {
-      setErrorMessage(error.response);
+      if (error) {
+        setErrorMessage(error.message);
+      }
     }
   };
 

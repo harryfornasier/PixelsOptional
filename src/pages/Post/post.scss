@@ -16,6 +16,9 @@
     border-radius: 5px;
     object-fit: contain;
     width: 100%;
+
+    &--portrait {
+    }
   }
 
   &__image-container {
@@ -31,6 +34,11 @@
     @include desktop {
       width: 40%;
       flex-grow: 2;
+
+      &--portrait {
+        flex-grow: unset;
+        width: 30%;
+      }
     }
   }
 

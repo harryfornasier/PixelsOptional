@@ -6,9 +6,12 @@ export async function getData(endpoint) {
 }
 
 export async function getPosts(pageNum) {
+  const userId = localStorage.getItem("userId");
+
   const posts = await axios.get(`${import.meta.env.VITE_BASE_URL}/posts`, {
     params: {
       page: pageNum,
+      userId: userId,
     },
   });
   return posts.data;
@@ -59,9 +62,22 @@ export async function postData(formData) {
 
 export async function patchLike(postId, foreignUserId) {
   const authToken = localStorage.getItem("authToken");
-  const response = axios.patch(
+  const response = await axios.patch(
     `${import.meta.env.VITE_BASE_URL}/posts/${postId}`,
     { foreignUser: foreignUserId },
+    {
+      headers: {
+        authorisation: `Bearer ${authToken}`,
+      },
+    }
+  );
+  return response;
+}
+
+export async function deletePost(postId) {
+  const authToken = localStorage.getItem("authToken");
+  const response = await axios.delete(
+    `${import.meta.env.VITE_BASE_URL}/posts/${postId}`,
     {
       headers: {
         authorisation: `Bearer ${authToken}`,
