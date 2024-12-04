@@ -11,6 +11,7 @@ import Register from "./pages/Register/Register.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import ProfileView from "./pages/ProfileView/ProfileView.jsx";
+import About from "./pages/About/About.jsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,6 +30,7 @@ function App() {
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<LazyHome />} />
+          <Route path="/about" element={<About />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/post/:id" element={<Post loggedIn={loggedIn} />} />
           <Route path="/users/login" element={<Login setLoggedIn={setLoggedIn} />} />
