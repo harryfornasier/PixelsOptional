@@ -109,3 +109,20 @@ export async function changeIcon(iconUrl) {
   );
   return response;
 }
+
+export async function deleteComment(postId, id) {
+  const authToken = localStorage.getItem("authToken");
+
+  const response = await axios.delete(
+    `${import.meta.env.VITE_BASE_URL}/comments/${postId}`,
+    {
+      headers: {
+        authorisation: `Bearer ${authToken}`,
+      },
+      data: {
+        commentId: id,
+      },
+    }
+  );
+  return response;
+}

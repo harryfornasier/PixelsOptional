@@ -6,6 +6,7 @@
   padding: 0.5rem;
   display: flex;
   gap: 0.4rem;
+  justify-content: space-between;
 
   &__container {
     display: flex;
@@ -13,5 +14,13 @@
     gap: 0.5rem;
     overflow-y: scroll;
     height: 55vh;
+  }
+
+  &__divider {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  &__delete {
   }
 }

@@ -39,8 +39,6 @@ export default function Post({ loggedIn }) {
   async function handleCommentApi() {
     const commentResponse = await getComments(id);
 
-    console.log(commentResponse);
-
     //Checks if no one has posted a comment
     //Set Comment to an empty string within an array so map does not fail
     //In comments component "no comment" message is

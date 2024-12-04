@@ -32,7 +32,6 @@ export default function Profile({ setLoggedIn }) {
 
   async function handleIcon() {
     const response = await changeIcon(selectedOption);
-    console.log(response);
   }
 
   const getUserData = async () => {
@@ -47,7 +46,6 @@ export default function Profile({ setLoggedIn }) {
 
       setUserData(data.user);
       setPosts(data.posts);
-      console.log(data);
 
       for (let i = 0; i < options.length; i++) {
         if (options[i].icon === data.user.icon_url) {
