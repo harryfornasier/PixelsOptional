@@ -22,20 +22,24 @@ export default function Post({ loggedIn }) {
 
   async function handleComment(event) {
     event.preventDefault();
-    if (loggedIn) {
+    if (!postComment) {
+      setError(`Well, partner, looks like you done forgot to jot down a comment.`);
+    } else if (!loggedIn) {
+      setError(`Hold up, partner! You need to log in before posting a comment.`);
+    } else {
       const comment = {
         postId: id,
         comment: postComment,
       };
       await sendComment(comment);
       await handleCommentApi();
-    } else {
-      setError(`Howdy, you gotta login before you post a comment`);
     }
   }
 
   async function handleCommentApi() {
     const commentResponse = await getComments(id);
+
+    console.log(commentResponse);
 
     //Checks if no one has posted a comment
     //Set Comment to an empty string within an array so map does not fail
@@ -90,7 +94,7 @@ export default function Post({ loggedIn }) {
               alt=""
             />
           </div>
-          <CardDetails post={post} />
+          <CardDetails setError={setError} post={post} />
         </section>
       </div>
       <div className="post__divider">
@@ -112,7 +116,7 @@ export default function Post({ loggedIn }) {
           </div>
           {error && (
             <section className="error">
-              <img src={badBart} alt="" />
+              <img className="icon" src={badBart} alt="" />
               <p>{error}</p>
             </section>
           )}

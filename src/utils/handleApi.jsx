@@ -62,16 +62,24 @@ export async function postData(formData) {
 
 export async function patchLike(postId, foreignUserId) {
   const authToken = localStorage.getItem("authToken");
-  const response = await axios.patch(
-    `${import.meta.env.VITE_BASE_URL}/posts/${postId}`,
-    { foreignUser: foreignUserId },
-    {
-      headers: {
-        authorisation: `Bearer ${authToken}`,
-      },
+
+  try {
+    if (!authToken) {
+      return false;
     }
-  );
-  return response;
+    const response = await axios.patch(
+      `${import.meta.env.VITE_BASE_URL}/posts/${postId}`,
+      { foreignUser: foreignUserId },
+      {
+        headers: {
+          authorisation: `Bearer ${authToken}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
 }
 
 export async function deletePost(postId) {

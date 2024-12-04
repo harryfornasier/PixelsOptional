@@ -1,6 +1,7 @@
 import { postData } from "../../utils/handleApi";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import bot from "../../assets/icons/bot.png";
 import "./upload.scss";
 
 export default function Upload() {
@@ -11,8 +12,11 @@ export default function Upload() {
 
   async function handleFormData() {
     const formData = new FormData();
+    const authToken = localStorage.getItem("authToken");
 
-    if (!title) {
+    if (!authToken) {
+      setError("You are not logged in");
+    } else if (!title) {
       setError("You didn't add a title");
     } else if (!image) {
       setError("You didn't add an image");
@@ -55,6 +59,7 @@ export default function Upload() {
             id="title"
             onChange={(e) => {
               setTitle(e.target.value);
+              setError("");
             }}
           />
           <button className="form__button form__button--desktop" onClick={handleFormData}>
@@ -62,7 +67,8 @@ export default function Upload() {
           </button>
           {error && (
             <section className="error">
-              <p className="error__message">{error}</p>
+              <img className="icon" src={bot} alt="" />
+              <p className="error__message">ValidationBot says: Beeb Boop...{error}</p>
             </section>
           )}
         </section>

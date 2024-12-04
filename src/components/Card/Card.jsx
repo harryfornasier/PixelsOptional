@@ -22,7 +22,7 @@ export default function Card({ post, fetchPosts }) {
         </div>
         <div className="card__author-container">
           <div className="card__icon-container">
-            <img src={post.icon_url} alt="" />
+            <img className="icon" src={post.icon_url} alt="" />
           </div>
           <Link to={`/profile/${post.user_id}`}>{post.name}</Link>
         </div>

@@ -42,6 +42,13 @@ export default function Home() {
           })}
         </Masonry>
       </ResponsiveMasonry>
+      <Pagination
+        page={page}
+        setSearchParams={setSearchParams}
+        setPage={setPage}
+        fetchPosts={fetchPosts}
+        searchParams={searchParams}
+      />
     </>
   );
 }

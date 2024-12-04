@@ -3,6 +3,8 @@ import "./header.scss";
 import home from "../../assets/icons/home.png";
 import upload from "../../assets/icons/upload.png";
 import profile from "../../assets/icons/profile.png";
+import about from "../../assets/icons/about.png";
+import register from "../../assets/icons/register.png";
 
 export default function Header({ loggedIn }) {
   return (
@@ -41,11 +43,17 @@ export default function Header({ loggedIn }) {
           {!loggedIn && (
             <NavLink to={"/users/register"}>
               <div className="header__container">
-                <img src={profile} alt="" className="header__icon icon" />
+                <img src={register} alt="" className="header__icon icon" />
                 <li className="header__item">Register</li>
               </div>
             </NavLink>
           )}
+          <NavLink to={"/about"}>
+            <div className="header__container">
+              <img src={about} alt="" className="header__icon icon" />
+              <li className="header__item">About</li>
+            </div>
+          </NavLink>
         </ul>
       </header>
     </>

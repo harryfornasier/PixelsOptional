@@ -4,17 +4,28 @@ import axios from "axios";
 import { patchLike } from "../../utils/handleApi.jsx";
 import { useState } from "react";
 
-export default function CardDetails({ post, fetchPosts }) {
+export default function CardDetails({ post, fetchPosts, setError }) {
+  const loggedUser = localStorage.getItem("userId");
   async function handleLike() {
     const response = await patchLike(post.id, post.user_id);
-    fetchPosts();
+
+    if (response) {
+      fetchPosts();
+    } else {
+      if (setError) {
+        setError("You ain't logged in");
+      }
+    }
   }
 
+  console.log(post.user_id);
+  console.log(loggedUser);
   return (
     <>
       <div className="card__details-container">
         <button
           onClick={handleLike}
+          disabled={post.user_id !== loggedUser}
           className={
             post.user_liked
               ? "card__like-container card__like-container--active"
