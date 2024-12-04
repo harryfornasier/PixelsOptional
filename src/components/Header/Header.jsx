@@ -10,7 +10,7 @@ export default function Header({ loggedIn }) {
       <header className="header">
         <h1 className="header__title">PixelsOptional</h1>
         <ul className="header__list">
-          <NavLink to={"/1"}>
+          <NavLink to={"/"}>
             <div className="header__container">
               <img src={home} alt="" className="header__icon icon" />
               <li className="header__item">Home</li>

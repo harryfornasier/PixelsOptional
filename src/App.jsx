@@ -28,7 +28,7 @@ function App() {
         <Header loggedIn={loggedIn} />
         <Routes>
           <Route path="*" element={<NotFound />} />
-          <Route path="/:id" element={<LazyHome />} />
+          <Route path="/" element={<LazyHome />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/post/:id" element={<Post loggedIn={loggedIn} />} />
           <Route path="/users/login" element={<Login setLoggedIn={setLoggedIn} />} />

@@ -39,6 +39,26 @@
     font-weight: 100;
   }
 
+  &__author-container {
+    padding: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__icon-container {
+    background-color: #d3d3d3;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    width: 3rem;
+    height: 3rem;
+    border: solid 3px #34332f;
+  }
+
   &__title {
     font-size: small;
     font-weight: 400;

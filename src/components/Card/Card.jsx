@@ -21,10 +21,10 @@ export default function Card({ post, fetchPosts }) {
           </Link>
         </div>
         <div className="card__author-container">
-          <Link to={`/profile/${post.user_id}`}>
-            <img src="" alt="" />
-            <p className="card__author">{post.name}</p>
-          </Link>
+          <div className="card__icon-container">
+            <img src={post.icon_url} alt="" />
+          </div>
+          <Link to={`/profile/${post.user_id}`}>{post.name}</Link>
         </div>
         <CardDetails fetchPosts={fetchPosts} post={post} />
       </section>

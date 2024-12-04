@@ -1,6 +1,6 @@
 import Loading from "../../components/Loading/Loading";
 import { useParams } from "react-router";
-import { getData, getPost } from "../../utils/handleApi";
+import { getPost } from "../../utils/handleApi";
 import { useState } from "react";
 import { useEffect } from "react";
 import Comment from "../../components/Comment/Comment";
@@ -20,15 +20,15 @@ export default function Post({ loggedIn }) {
   const [postComment, setPostComment] = useState("");
   const [error, setError] = useState("");
 
-  function handleComment(event) {
+  async function handleComment(event) {
     event.preventDefault();
     if (loggedIn) {
       const comment = {
         postId: id,
         comment: postComment,
       };
-      sendComment(comment);
-      setComments();
+      await sendComment(comment);
+      await handleCommentApi();
     } else {
       setError(`Howdy, you gotta login before you post a comment`);
     }
@@ -36,8 +36,6 @@ export default function Post({ loggedIn }) {
 
   async function handleCommentApi() {
     const commentResponse = await getComments(id);
-
-    console.log(commentResponse);
 
     //Checks if no one has posted a comment
     //Set Comment to an empty string within an array so map does not fail
@@ -56,7 +54,6 @@ export default function Post({ loggedIn }) {
 
   async function handleDelete() {
     const response = await deletePost(id);
-    console.log(response);
   }
 
   useEffect(() => {
@@ -72,12 +69,12 @@ export default function Post({ loggedIn }) {
     <main className="main">
       <div
         className={
-          post.landscape ? "post__border" : "post__border post__border--portrait"
+          post.orientation ? "post__border" : "post__border post__border--portrait"
         }
       >
         <section className="post">
           <div className="post__title-container">
-            <h1 className="post__title">{post.title}</h1>
+            <h3 className="post__title">{post.title}</h3>
             <h3 className="post__date">
               {post.created_at.replace(timeStampPattern, "$3/$2/$1")}
             </h3>
@@ -120,13 +117,15 @@ export default function Post({ loggedIn }) {
             </section>
           )}
         </form>
-        {comments ? (
-          comments.map((comment) => {
-            return <Comment key={comment.id ? comment.id : 1} comment={comment} />;
-          })
-        ) : (
-          <Loading />
-        )}
+        <div className="comment__container">
+          {comments ? (
+            comments.map((comment) => {
+              return <Comment key={comment.id ? comment.id : 1} comment={comment} />;
+            })
+          ) : (
+            <Loading />
+          )}
+        </div>
       </div>
     </main>
   );

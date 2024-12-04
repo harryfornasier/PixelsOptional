@@ -8,7 +8,6 @@ export default function Upload() {
   const [previewImage, setPreviewImage] = useState(null);
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   async function handleFormData() {
     const formData = new FormData();
@@ -28,7 +27,6 @@ export default function Upload() {
         );
       }
     }
-    //navigate(`/post/${response}`);
   }
 
   function handleImage(event) {

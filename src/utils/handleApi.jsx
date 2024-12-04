@@ -86,3 +86,18 @@ export async function deletePost(postId) {
   );
   return response;
 }
+
+export async function changeIcon(iconUrl) {
+  const authToken = localStorage.getItem("authToken");
+  const userId = localStorage.getItem("userId");
+  const response = await axios.patch(
+    `${import.meta.env.VITE_BASE_URL}/users/profile/${userId}`,
+    { iconUrl: iconUrl },
+    {
+      headers: {
+        authorisation: `Bearer ${authToken}`,
+      },
+    }
+  );
+  return response;
+}
