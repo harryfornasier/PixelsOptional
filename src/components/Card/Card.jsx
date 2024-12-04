@@ -3,7 +3,7 @@ import "./card.scss";
 import Lines from "../Lines/Lines";
 import CardDetails from "../CardDetails/CardDetails";
 
-export default function Card({ post, fetchPosts }) {
+export default function Card({ post, fetchPosts, userView }) {
   const timeStampPattern = /(\d{4})-(\d{2})-(\d{2})T.*$/;
   return (
     <div className="card__border">
@@ -20,12 +20,14 @@ export default function Card({ post, fetchPosts }) {
             <img src={post.image_url} alt="" className="card__img" />
           </Link>
         </div>
-        <div className="card__author-container">
-          <div className="card__icon-container">
-            <img className="icon" src={post.icon_url} alt="" />
+        {!userView && (
+          <div className="card__author-container">
+            <div className="card__icon-container">
+              <img className="icon" src={post.icon_url} alt="" />
+            </div>
+            <Link to={`/profile/${post.user_id}`}>{post.name}</Link>
           </div>
-          <Link to={`/profile/${post.user_id}`}>{post.name}</Link>
-        </div>
+        )}
         <CardDetails fetchPosts={fetchPosts} post={post} />
       </section>
     </div>

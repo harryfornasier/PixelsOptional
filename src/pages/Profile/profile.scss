@@ -1,3 +1,23 @@
+@use "../../styles/mixins" as *;
 .select__container {
   display: flex;
+  flex-direction: column;
+  width: fit-content;
+  gap: 0.5rem;
+}
+
+.profile__header {
+  margin: unset;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  @include desktop {
+    flex-direction: unset;
+  }
 }

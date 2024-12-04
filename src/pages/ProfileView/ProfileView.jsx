@@ -27,13 +27,19 @@ export default function ProfileView() {
 
   return (
     <>
-      <h1>{`User: ${userData.user}`}</h1>{" "}
+      <h1 className="profile__header">
+        {userData.user.name}
+        <div class="card__icon-container">
+          <img src={userData.user.icon_url} alt="" />
+        </div>
+      </h1>
+      <h2>Likes: {userData.user.likes}</h2>
       <section>
         <h2>User Posts</h2>
         <ResponsiveMasonry columnsCountBreakPoints={{ 320: 1, 750: 2, 900: 3 }}>
           <Masonry>
             {userData.posts.map((post) => {
-              return <Card key={post.id} post={post} />;
+              return <Card userView={true} key={post.id} post={post} />;
             })}
           </Masonry>
         </ResponsiveMasonry>

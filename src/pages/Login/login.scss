@@ -1,0 +1,17 @@
+@use "../../styles/mixins" as *;
+
+.form {
+  margin: 0 auto;
+
+  @include desktop {
+    width: 30%;
+  }
+  &__group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input {
+    height: 3rem;
+  }
+}

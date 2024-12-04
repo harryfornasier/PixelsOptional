@@ -7,6 +7,8 @@ import { components } from "react-select";
 import "./profile.scss";
 import { changeIcon } from "../../utils/handleApi";
 import options from "../../assets/iconOptions";
+import { useNavigate } from "react-router";
+import Loading from "../../components/Loading/Loading.jsx";
 
 export default function Profile({ setLoggedIn }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,6 +16,8 @@ export default function Profile({ setLoggedIn }) {
   const [posts, setPosts] = useState([]);
   const [userData, setUserData] = useState({});
   const [selectedOption, setSelectedOption] = useState(null);
+
+  const navigate = useNavigate();
 
   const { Option } = components;
   const IconOption = (props) => {
@@ -43,6 +47,7 @@ export default function Profile({ setLoggedIn }) {
 
       setUserData(data.user);
       setPosts(data.posts);
+      console.log(data);
 
       for (let i = 0; i < options.length; i++) {
         if (options[i].icon === data.user.icon_url) {
@@ -67,34 +72,44 @@ export default function Profile({ setLoggedIn }) {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
     localStorage.removeItem("admin");
+    navigate("/");
   };
 
   return (
     <main>
-      {isLoading && <h1>Loading...</h1>}
+      {isLoading && <Loading />}
       {!isLoading && !error && (
         <>
-          <section>
-            <h1>Welcome</h1>
-            {selectedOption && <img src={selectedOption.icon} alt="" />}
+          <section className="profile">
+            <section className="profile__information">
+              <h1 className="profile__header">
+                Welcome {userData.name}
+                <div class="card__icon-container">
+                  {selectedOption && <img src={selectedOption.icon} alt="" />}
+                </div>
+              </h1>
+              <p>Email: {userData.email}</p>
 
-            <p>Name: {userData.name}</p>
-            <p>Email: {userData.email}</p>
-            <p>Like Pot: {userData.pot}</p>
-            <p>Recieved Likes: {userData.likes}</p>
-            <section className="select__container">
-              <Select
-                onChange={setSelectedOption}
-                defaultValue={selectedOption}
-                options={options}
-                components={{ Option: IconOption }}
-              />
-              <button onClick={handleIcon} className="select__submit">
-                Submit
-              </button>
+              <p>Like Pot: {userData.pot}</p>
+              <p>Recieved Likes: {userData.likes}</p>
+
+              <button onClick={handleLogout}>Logout</button>
             </section>
-
-            <button onClick={handleLogout}>Logout</button>
+            <section className="profile__edit">
+              <section className="select__container">
+                <label htmlFor="select">User Icon:</label>
+                <Select
+                  id="select"
+                  onChange={setSelectedOption}
+                  defaultValue={selectedOption}
+                  options={options}
+                  components={{ Option: IconOption }}
+                />
+                <button onClick={handleIcon} className="select__submit">
+                  Submit
+                </button>
+              </section>
+            </section>
           </section>
 
           <section>
@@ -103,7 +118,7 @@ export default function Profile({ setLoggedIn }) {
             <ResponsiveMasonry columnsCountBreakPoints={{ 320: 1, 750: 2, 900: 3 }}>
               <Masonry>
                 {posts.map((post) => {
-                  return <Card post={post}></Card>;
+                  return <Card userView={true} post={post}></Card>;
                 })}
               </Masonry>
             </ResponsiveMasonry>

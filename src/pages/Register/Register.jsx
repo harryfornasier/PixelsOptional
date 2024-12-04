@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import "../Login/login.scss";
 
 export default function Register() {
   const [errorMessage, setErrorMessage] = useState(false);
@@ -43,15 +44,22 @@ export default function Register() {
 
   return (
     <>
-      <h2>Register</h2>
       <form className="form" onSubmit={handleSubmit}>
+        <h2>Register</h2>
         <div className="form__group">
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" id="name" onChange={(e) => handleChange(e)} />
+          <input
+            type="text"
+            name="name"
+            className="form__input"
+            id="name"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
         <div className="form__group">
           <label htmlFor="emailRegister">Email</label>
           <input
+            className="form__input"
             type="email"
             name="email"
             id="emailRegister"
@@ -61,13 +69,14 @@ export default function Register() {
         <div className="form__group">
           <label htmlFor="passwordRegister">Password</label>
           <input
+            className="form__input"
             type="password"
             name="password"
             id="passwordRegister"
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <button>Signup</button>
+        <button className="form__button">Signup</button>
         {errorMessage && <p>{errorMessage}</p>}
         {success && <p>Success! Please login.</p>}
       </form>

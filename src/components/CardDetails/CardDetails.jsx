@@ -17,15 +17,12 @@ export default function CardDetails({ post, fetchPosts, setError }) {
       }
     }
   }
-
-  console.log(post.user_id);
-  console.log(loggedUser);
   return (
     <>
       <div className="card__details-container">
         <button
           onClick={handleLike}
-          disabled={post.user_id !== loggedUser}
+          disabled={post.user_id == loggedUser || !loggedUser}
           className={
             post.user_liked
               ? "card__like-container card__like-container--active"
