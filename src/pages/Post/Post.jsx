@@ -42,7 +42,7 @@ export default function Post({ loggedIn }) {
     //Checks if no one has posted a comment
     //Set Comment to an empty string within an array so map does not fail
     //In comments component "no comment" message is
-    if (commentResponse.status === 204) {
+    if (commentResponse.status === 404) {
       setComments([""]);
     } else {
       setComments(commentResponse.data.comments);

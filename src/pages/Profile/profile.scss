@@ -21,3 +21,10 @@
     flex-direction: unset;
   }
 }
+
+.camera {
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+}

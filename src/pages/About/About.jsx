@@ -58,7 +58,7 @@ export default function About() {
       <p className="about__text">
         No, but I think they're very cool too. They were made by Etherbrian, aka Brian
         Brasher in the late 90s for Macintosh computer icons. Check out his website here:
-        <a href="https://etherbrian.github.io/index.html">etherbrian</a>
+        <a href="https://etherbrian.github.io/index.html"> etherbrian</a>
       </p>
     </section>
   );

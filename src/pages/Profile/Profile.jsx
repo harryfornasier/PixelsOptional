@@ -5,7 +5,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Select from "react-select";
 import { components } from "react-select";
 import "./profile.scss";
-import { changeIcon } from "../../utils/handleApi";
+import { changeIcon, postCamera } from "../../utils/handleApi";
 import options from "../../assets/iconOptions";
 import { useNavigate } from "react-router";
 import Loading from "../../components/Loading/Loading.jsx";
@@ -16,6 +16,11 @@ export default function Profile({ setLoggedIn }) {
   const [posts, setPosts] = useState([]);
   const [userData, setUserData] = useState({});
   const [selectedOption, setSelectedOption] = useState(null);
+  const [camera, setCamera] = useState({
+    cameraBrand: "",
+    cameraYear: 1,
+    cameraModel: "",
+  });
 
   const navigate = useNavigate();
 
@@ -29,6 +34,8 @@ export default function Profile({ setLoggedIn }) {
       </Option>
     );
   };
+
+  function handleCameraChange(event) {}
 
   async function handleIcon() {
     const response = await changeIcon(selectedOption);
@@ -60,6 +67,12 @@ export default function Profile({ setLoggedIn }) {
       }
     }
   };
+
+  async function handleCameraApi(event) {
+    event.preventDefault();
+
+    const newCamera = await postCamera(camera);
+  }
 
   useEffect(() => {
     getUserData();
@@ -93,6 +106,60 @@ export default function Profile({ setLoggedIn }) {
 
               <button onClick={handleLogout}>Logout</button>
             </section>
+
+            <section className="camera">
+              <form className="camera__form" action="submit">
+                <label className="form__label" htmlFor="brand">
+                  Brand
+                </label>
+                <input
+                  onChange={(e) => {
+                    setCamera({
+                      cameraBrand: e.target.value,
+                      cameraYear: camera.cameraYear,
+                      cameraModel: camera.cameraBrand,
+                    });
+                  }}
+                  className="form__input"
+                  type="text"
+                  htmlFor="brand"
+                  id="brand"
+                />
+                <label className="form__label" htmlFor="model">
+                  Model
+                </label>
+                <input
+                  type="text"
+                  className="form__input"
+                  onChange={(e) => {
+                    setCamera({
+                      cameraBrand: camera.cameraBrand,
+                      cameraYear: camera.cameraYear,
+                      cameraModel: e.target.value,
+                    });
+                  }}
+                />
+                <label htmlFor="year" className="form__label">
+                  Year
+                </label>
+                <input
+                  type="number"
+                  maxLength={4}
+                  className="form__input"
+                  onChange={(e) => {
+                    setCamera({
+                      cameraBrand: camera.cameraBrand,
+                      cameraYear: e.target.value,
+                      cameraModel: camera.cameraModel,
+                    });
+                  }}
+                />
+              </form>
+              <button className="form__button" onClick={handleCameraApi}>
+                Submit
+              </button>
+            </section>
+
             <section className="profile__edit">
               <section className="select__container">
                 <label htmlFor="select">User Icon:</label>

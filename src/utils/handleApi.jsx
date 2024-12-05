@@ -23,8 +23,12 @@ export async function getPost(id) {
 }
 
 export async function getComments(id) {
-  const comments = await axios.get(`${import.meta.env.VITE_BASE_URL}/comments/${id}`);
-  return comments;
+  try {
+    const comments = await axios.get(`${import.meta.env.VITE_BASE_URL}/comments/${id}`);
+    return comments;
+  } catch (error) {
+    return error;
+  }
 }
 
 export async function sendComment(data) {
@@ -125,4 +129,22 @@ export async function deleteComment(postId, id) {
     }
   );
   return response;
+}
+
+export async function postCamera(camera) {
+  const authToken = localStorage.getItem("authToken");
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/cameras`,
+      camera,
+      {
+        headers: {
+          authorisation: `Bearer ${authToken}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
 }
