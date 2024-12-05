@@ -4,7 +4,7 @@ import { deleteComment } from "../../utils/handleApi";
 
 export default function Comment({ comment }) {
   const userId = localStorage.getItem("userId");
-
+  console.log(comment);
   async function handleDelete() {
     await deleteComment(comment.post_id, comment.id);
   }

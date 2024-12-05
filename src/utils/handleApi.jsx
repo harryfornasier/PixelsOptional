@@ -88,6 +88,7 @@ export async function patchLike(postId, foreignUserId) {
 
 export async function deletePost(postId) {
   const authToken = localStorage.getItem("authToken");
+
   const response = await axios.delete(
     `${import.meta.env.VITE_BASE_URL}/posts/${postId}`,
     {
