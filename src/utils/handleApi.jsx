@@ -34,11 +34,12 @@ export async function getComments(id) {
 export async function sendComment(data) {
   const authToken = localStorage.getItem("authToken");
   try {
-    const response = axios.post(`${import.meta.env.VITE_BASE_URL}/comments`, data, {
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/comments`, data, {
       headers: {
         authorisation: `Bearer ${authToken}`,
       },
     });
+    console.log(response);
     return response;
   } catch (error) {
     return error;
