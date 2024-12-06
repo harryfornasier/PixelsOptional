@@ -1,7 +1,8 @@
-import { postData } from "../../utils/handleApi";
-import { useState } from "react";
+import { getCamerasByUsername, postData } from "../../utils/handleApi";
+import { useEffect, useState } from "react";
 import bot from "../../assets/icons/bot.png";
 import { useNavigate } from "react-router";
+import Select from "react-select";
 import "./upload.scss";
 
 export default function Upload() {
@@ -9,6 +10,13 @@ export default function Upload() {
   const [previewImage, setPreviewImage] = useState(null);
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [options, setOptions] = useState([
+    {
+      value: null,
+      label: null,
+    },
+  ]);
 
   const navigate = useNavigate();
 
@@ -25,6 +33,7 @@ export default function Upload() {
     } else {
       formData.append("image", image);
       formData.append("title", title);
+      formData.append("camera_id", selectedOption.value);
       const response = await postData(formData);
       setTitle("");
 
@@ -48,6 +57,20 @@ export default function Upload() {
     }
   }
 
+  async function getCameras() {
+    const userId = localStorage.getItem("userId");
+    const response = await getCamerasByUsername(userId);
+    const cameras = response.data.cameras;
+    const cameraArray = [];
+    cameras.forEach((camera) => {
+      cameraArray.push({ value: camera.id, label: camera.model });
+    });
+    setOptions(cameraArray);
+  }
+  useEffect(() => {
+    getCameras();
+  }, []);
+
   return (
     <section className="upload">
       <h1>Upload image</h1>
@@ -68,6 +91,8 @@ export default function Upload() {
               setError("");
             }}
           />
+          <label className="form__label">Camera:</label>
+          <Select options={options} onChange={setSelectedOption} />
           <button className="form__button form__button--desktop" onClick={handleFormData}>
             Upload
           </button>
@@ -83,7 +108,7 @@ export default function Upload() {
             {previewImage && <img className="photo__photo" src={previewImage} alt="" />}
 
             <label htmlFor="file" className="form__input-file">
-              Add photo
+              Add photo (Max 4.5mb)
             </label>
             <input
               className="form__file"

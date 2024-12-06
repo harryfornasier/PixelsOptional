@@ -37,6 +37,9 @@
     cursor: pointer;
     margin: 0.5rem;
     height: 5rem;
+    &:hover {
+      background-color: #e07a5f;
+    }
 
     &--desktop {
       display: none;

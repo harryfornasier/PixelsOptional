@@ -73,8 +73,8 @@ export default function Profile({ setLoggedIn }) {
 
   async function handleCameraApi(event) {
     event.preventDefault();
-
     const newCamera = await postCamera(camera);
+    getUserData();
   }
 
   useEffect(() => {
