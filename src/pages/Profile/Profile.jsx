@@ -9,17 +9,19 @@ import { changeIcon, getCamerasByUsername, postCamera } from "../../utils/handle
 import options from "../../assets/iconOptions";
 import { useNavigate } from "react-router";
 import Loading from "../../components/Loading/Loading.jsx";
+import halt from "../../assets/icons/halt.png";
 
 export default function Profile({ setLoggedIn }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [validationError, setValidationError] = useState("");
   const [posts, setPosts] = useState([]);
   const [userData, setUserData] = useState({});
   const [selectedOption, setSelectedOption] = useState(null);
   const [userCameras, setUserCameras] = useState(null);
   const [camera, setCamera] = useState({
     cameraBrand: "",
-    cameraYear: 1,
+    cameraYear: "",
     cameraModel: "",
   });
 
@@ -56,7 +58,7 @@ export default function Profile({ setLoggedIn }) {
       setPosts(data.posts);
       setUserCameras(response.data.cameras);
 
-      console.log(data);
+      console.log(userCameras);
 
       for (let i = 0; i < options.length; i++) {
         if (options[i].icon === data.user.icon_url) {
@@ -75,8 +77,23 @@ export default function Profile({ setLoggedIn }) {
 
   async function handleCameraApi(event) {
     event.preventDefault();
-    const newCamera = await postCamera(camera);
-    getUserData();
+    setValidationError("");
+
+    if (!camera.model) {
+      setValidationError("You need to include a camera model");
+    } else if (!camera.brand) {
+      setValidationError("You need to enter a camera brand");
+    } else if (!camera.year) {
+      setValidationError("You need to enter a camera year");
+    } else {
+      const newCamera = await postCamera(camera);
+      getUserData();
+      setCamera({
+        cameraBrand: "",
+        cameraYear: "",
+        cameraModel: "",
+      });
+    }
   }
 
   useEffect(() => {
@@ -98,21 +115,42 @@ export default function Profile({ setLoggedIn }) {
         <>
           <section className="profile">
             <section className="profile__information">
-              <h1 className="profile__header">
-                Welcome {userData.name}
-                <div class="card__icon-container">
-                  {selectedOption && <img src={selectedOption.icon} alt="" />}
-                </div>
-              </h1>
-              <p>Email: {userData.email}</p>
+              <div className="profile__text-container">
+                <h1 className="profile__header">
+                  Welcome {userData.name}
+                  <div class="card__icon-container">
+                    {selectedOption && <img src={selectedOption.icon} alt="" />}
+                  </div>
+                </h1>
+                <button onClick={handleLogout}>Logout</button>
+                <p>Email: {userData.email}</p>
 
-              <p>Like Pot: {userData.pot}</p>
-              <p>Recieved Likes: {userData.likes}</p>
+                <p>Like Pot: {userData.pot}</p>
+                <p>Recieved Likes: {userData.likes}</p>
+              </div>
 
-              <button onClick={handleLogout}>Logout</button>
+              <section className="profile__edit">
+                <section className="select__container">
+                  <label htmlFor="select">User Icon:</label>
+                  <Select
+                    id="select"
+                    onChange={setSelectedOption}
+                    defaultValue={selectedOption}
+                    options={options}
+                    components={{ Option: IconOption }}
+                  />
+                  <button onClick={handleIcon} className="select__submit">
+                    Submit
+                  </button>
+                </section>
+              </section>
             </section>
 
             <section className="camera">
+              <h2 className="camera__title">Add your camera: </h2>
+              <p>Get information on your cameras here:</p>
+              <a href="https://www.digicamdb.com/">Digital Cameras</a>
+              <a href="https://www.pbase.com/cameras">Film Cameras</a>
               <form className="camera__form" action="submit">
                 <label className="form__label" htmlFor="brand">
                   Brand
@@ -122,9 +160,10 @@ export default function Profile({ setLoggedIn }) {
                     setCamera({
                       cameraBrand: e.target.value,
                       cameraYear: camera.cameraYear,
-                      cameraModel: camera.cameraBrand,
+                      cameraModel: camera.cameraModel,
                     });
                   }}
+                  value={camera.cameraBrand}
                   className="form__input"
                   type="text"
                   htmlFor="brand"
@@ -134,6 +173,7 @@ export default function Profile({ setLoggedIn }) {
                   Model
                 </label>
                 <input
+                  value={camera.cameraModel}
                   type="text"
                   className="form__input"
                   onChange={(e) => {
@@ -148,6 +188,7 @@ export default function Profile({ setLoggedIn }) {
                   Year
                 </label>
                 <input
+                  value={camera.cameraYear}
                   type="number"
                   maxLength={4}
                   className="form__input"
@@ -160,40 +201,34 @@ export default function Profile({ setLoggedIn }) {
                   }}
                 />
               </form>
+              {validationError && (
+                <p className="validation">
+                  <img src={halt} alt="" />
+                  {validationError}
+                </p>
+              )}
               <button className="form__button" onClick={handleCameraApi}>
                 Submit
               </button>
             </section>
 
-            <section className="profile__edit">
-              <section className="select__container">
-                <label htmlFor="select">User Icon:</label>
-                <Select
-                  id="select"
-                  onChange={setSelectedOption}
-                  defaultValue={selectedOption}
-                  options={options}
-                  components={{ Option: IconOption }}
-                />
-                <button onClick={handleIcon} className="select__submit">
-                  Submit
-                </button>
-              </section>
-            </section>
-
-            {userCameras && (
-              <section className="cameras">
+            <section className="cameras">
+              <h2 className="cameras__title">Your cameras: </h2>
+              {!userCameras.length && <p>You haven't added any cameras</p>}
+              <div className="cameras__divider">
                 {userCameras.map((camera) => {
                   return (
-                    <div className="cameras__divider">
-                      <p>{camera.brand}</p>
-                      <p>{camera.model}</p>
+                    <div className="cameras__card">
+                      <div className="cameras__card-model">
+                        <p>{camera.brand}</p>
+                        <p>{camera.model}</p>
+                      </div>
                       <p>{camera.year}</p>
                     </div>
                   );
                 })}
-              </section>
-            )}
+              </div>
+            </section>
           </section>
 
           <section>
@@ -202,7 +237,7 @@ export default function Profile({ setLoggedIn }) {
             <ResponsiveMasonry columnsCountBreakPoints={{ 320: 1, 750: 2, 900: 3 }}>
               <Masonry>
                 {posts.map((post) => {
-                  return <Card userView={true} post={post}></Card>;
+                  return <Card key={post.id} userView={true} post={post}></Card>;
                 })}
               </Masonry>
             </ResponsiveMasonry>

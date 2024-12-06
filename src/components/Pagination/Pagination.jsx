@@ -1,13 +1,6 @@
 import "./pagination.scss";
 
-export default function Pagination({
-  page,
-  maxPage,
-  setPage,
-  fetchPosts,
-  setSearchParams,
-  searchParams,
-}) {
+export default function Pagination({ page, setPage, setSearchParams }) {
   function handlePrevious() {
     setPage(page - 1);
     setSearchParams({ page: page - 1 });
@@ -26,7 +19,7 @@ export default function Pagination({
         <button
           onClick={handlePrevious}
           className="pagination__button"
-          disabled={searchParams.get("page") <= 1}
+          disabled={page === 1}
         >
           Previous
         </button>
