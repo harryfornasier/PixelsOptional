@@ -5,7 +5,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Select from "react-select";
 import { components } from "react-select";
 import "./profile.scss";
-import { changeIcon, postCamera } from "../../utils/handleApi";
+import { changeIcon, getCamerasByUsername, postCamera } from "../../utils/handleApi";
 import options from "../../assets/iconOptions";
 import { useNavigate } from "react-router";
 import Loading from "../../components/Loading/Loading.jsx";
@@ -16,6 +16,7 @@ export default function Profile({ setLoggedIn }) {
   const [posts, setPosts] = useState([]);
   const [userData, setUserData] = useState({});
   const [selectedOption, setSelectedOption] = useState(null);
+  const [userCameras, setUserCameras] = useState(null);
   const [camera, setCamera] = useState({
     cameraBrand: "",
     cameraYear: 1,
@@ -35,14 +36,13 @@ export default function Profile({ setLoggedIn }) {
     );
   };
 
-  function handleCameraChange(event) {}
-
   async function handleIcon() {
     const response = await changeIcon(selectedOption);
   }
 
   const getUserData = async () => {
     const authToken = localStorage.getItem("authToken");
+    const userId = localStorage.getItem("userId");
 
     try {
       const { data } = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/profile`, {
@@ -51,6 +51,8 @@ export default function Profile({ setLoggedIn }) {
         },
       });
 
+      const response = await getCamerasByUsername(userId);
+      setUserCameras(response.data.cameras);
       setUserData(data.user);
       setPosts(data.posts);
 
@@ -59,6 +61,7 @@ export default function Profile({ setLoggedIn }) {
           setSelectedOption(options[i]);
         }
       }
+
       setIsLoading(false);
     } catch (error) {
       if (error.status === 401) {
@@ -175,6 +178,20 @@ export default function Profile({ setLoggedIn }) {
                 </button>
               </section>
             </section>
+
+            {userCameras && (
+              <section className="cameras">
+                {userCameras.map((camera) => {
+                  return (
+                    <div className="cameras__divider">
+                      <p>{camera.brand}</p>
+                      <p>{camera.model}</p>
+                      <p>{camera.year}</p>
+                    </div>
+                  );
+                })}
+              </section>
+            )}
           </section>
 
           <section>

@@ -1,7 +1,7 @@
 import { postData } from "../../utils/handleApi";
-import { useNavigate } from "react-router";
 import { useState } from "react";
 import bot from "../../assets/icons/bot.png";
+import { useNavigate } from "react-router";
 import "./upload.scss";
 
 export default function Upload() {
@@ -9,6 +9,8 @@ export default function Upload() {
   const [previewImage, setPreviewImage] = useState(null);
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   async function handleFormData() {
     const formData = new FormData();
@@ -24,6 +26,9 @@ export default function Upload() {
       formData.append("image", image);
       formData.append("title", title);
       const response = await postData(formData);
+      setTitle("");
+
+      navigate(`/post/${response}`);
 
       if (response.status === 413) {
         setError(
@@ -57,6 +62,7 @@ export default function Upload() {
             type="text"
             name="title"
             id="title"
+            value={title}
             onChange={(e) => {
               setTitle(e.target.value);
               setError("");

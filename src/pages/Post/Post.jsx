@@ -32,6 +32,7 @@ export default function Post({ loggedIn }) {
         comment: postComment,
       };
       await sendComment(comment);
+      setPostComment("");
       await handleCommentApi();
     }
   }
@@ -103,6 +104,7 @@ export default function Post({ loggedIn }) {
           <div className="form-comment__container">
             <textarea
               type="text"
+              value={postComment}
               className="form-comment__input"
               onChange={(e) => {
                 setPostComment(e.target.value);

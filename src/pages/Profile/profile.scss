@@ -28,3 +28,11 @@
     flex-direction: column;
   }
 }
+
+.cameras {
+  &__divider {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+}

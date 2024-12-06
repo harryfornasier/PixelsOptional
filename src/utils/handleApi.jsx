@@ -149,3 +149,14 @@ export async function postCamera(camera) {
     return error;
   }
 }
+
+export async function getCamerasByUsername(userId) {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/cameras/${userId}`
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+}
