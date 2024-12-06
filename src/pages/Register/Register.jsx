@@ -37,7 +37,6 @@ export default function Register() {
       setErrorMessage("");
       setSuccess(true);
     } catch (error) {
-      console.log(error);
       setErrorMessage(error.response.data.msg);
     }
   };

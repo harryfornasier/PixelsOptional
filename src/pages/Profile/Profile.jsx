@@ -52,9 +52,11 @@ export default function Profile({ setLoggedIn }) {
       });
 
       const response = await getCamerasByUsername(userId);
-      setUserCameras(response.data.cameras);
       setUserData(data.user);
       setPosts(data.posts);
+      setUserCameras(response.data.cameras);
+
+      console.log(data);
 
       for (let i = 0; i < options.length; i++) {
         if (options[i].icon === data.user.icon_url) {

@@ -1,5 +1,5 @@
 import { getCamerasByUsername, postData } from "../../utils/handleApi";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import bot from "../../assets/icons/bot.png";
 import { useNavigate } from "react-router";
 import Select from "react-select";
@@ -11,12 +11,9 @@ export default function Upload() {
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
-  const [options, setOptions] = useState([
-    {
-      value: null,
-      label: null,
-    },
-  ]);
+  const [options, setOptions] = useState(null);
+  const [portrait, setPortrait] = useState(false);
+  const imgEl = useRef(null);
 
   const navigate = useNavigate();
 
@@ -49,6 +46,7 @@ export default function Upload() {
 
   function handleImage(event) {
     event.preventDefault();
+    console.log(event.target.files[0]);
     if (event.target.files[0].size > 4.5 * 1000 * 1024) {
       setError("File is too big");
     } else {
@@ -57,15 +55,25 @@ export default function Upload() {
     }
   }
 
+  function handlePreviewImg() {
+    if (imgEl.current.naturalHeight > imgEl.current.naturalWidth) {
+      setPortrait(true);
+    }
+  }
+
   async function getCameras() {
     const userId = localStorage.getItem("userId");
     const response = await getCamerasByUsername(userId);
     const cameras = response.data.cameras;
     const cameraArray = [];
-    cameras.forEach((camera) => {
-      cameraArray.push({ value: camera.id, label: camera.model });
-    });
-    setOptions(cameraArray);
+    if (cameras.length) {
+      cameras.forEach((camera) => {
+        cameraArray.push({ value: camera.id, label: camera.model });
+      });
+      setOptions(cameraArray);
+    } else {
+      setOptions(null);
+    }
   }
   useEffect(() => {
     getCameras();
@@ -75,7 +83,11 @@ export default function Upload() {
     <section className="upload">
       <h1>Upload image</h1>
       <div className="upload__container">
-        <section className="upload__section">
+        <section
+          className={
+            !portrait ? "upload__section" : "upload__section upload__section--portrait"
+          }
+        >
           <label htmlFor="title" className="form__label">
             Title
           </label>
@@ -92,7 +104,11 @@ export default function Upload() {
             }}
           />
           <label className="form__label">Camera:</label>
-          <Select options={options} onChange={setSelectedOption} />
+          <Select
+            className="form__select"
+            options={options}
+            onChange={setSelectedOption}
+          />
           <button className="form__button form__button--desktop" onClick={handleFormData}>
             Upload
           </button>
@@ -102,10 +118,25 @@ export default function Upload() {
               <p className="error__message">ValidationBot says: Beeb Boop...{error}</p>
             </section>
           )}
+          {!options && <p>You can add cameras you own in your profile page</p>}
         </section>
-        <section className="photo__container-border">
+        <section
+          className={
+            !portrait
+              ? "photo__container-border"
+              : "photo__container-border photo__container-border--portrait"
+          }
+        >
           <div className="photo__container">
-            {previewImage && <img className="photo__photo" src={previewImage} alt="" />}
+            {previewImage && (
+              <img
+                className="photo__photo"
+                src={previewImage}
+                ref={imgEl}
+                onLoad={handlePreviewImg}
+                alt=""
+              />
+            )}
 
             <label htmlFor="file" className="form__input-file">
               Add photo (Max 4.5mb)
