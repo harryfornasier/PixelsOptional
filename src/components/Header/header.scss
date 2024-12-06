@@ -1,0 +1,47 @@
+@use "../../styles/mixins" as *;
+
+.header {
+  background-color: #f7f1e3;
+  padding: 1rem;
+  border-right: solid 3px #34332f;
+  border-bottom: solid 3px #34332f;
+  border-left: solid 3px #34332f;
+  border-radius: 0 0 5px 5px;
+  margin-bottom: 2rem;
+
+  @include tablet {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: x-large;
+
+    @include tablet {
+      text-align: left;
+      font-size: xx-large;
+    }
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+
+    @include tablet {
+      gap: 2rem;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+  }
+}

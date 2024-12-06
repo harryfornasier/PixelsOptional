@@ -1,0 +1,26 @@
+.comment {
+  border: 3px solid #34332f;
+  border-radius: 5px;
+  color: #34332f;
+  background-color: #e07a5f;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: space-between;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: scroll;
+    height: 55vh;
+  }
+
+  &__divider {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  &__delete {
+  }
+}

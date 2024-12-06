@@ -1,0 +1,14 @@
+@use "../../styles/mixins" as *;
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include desktop {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
