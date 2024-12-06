@@ -1,4 +1,4 @@
-import "./notfound.scss";
+import "./notFound.scss";
 import assimilated from "../../assets/icons/Error/assimilated.png";
 import busted from "../../assets/icons/Error/busted.png";
 import clouded from "../../assets/icons/Error/clouded.png";
