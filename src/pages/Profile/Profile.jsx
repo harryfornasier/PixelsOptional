@@ -79,11 +79,11 @@ export default function Profile({ setLoggedIn }) {
     event.preventDefault();
     setValidationError("");
 
-    if (!camera.model) {
+    if (!camera.cameraModel) {
       setValidationError("You need to include a camera model");
-    } else if (!camera.brand) {
+    } else if (!camera.cameraModel) {
       setValidationError("You need to enter a camera brand");
-    } else if (!camera.year) {
+    } else if (!camera.cameraYear) {
       setValidationError("You need to enter a camera year");
     } else {
       const newCamera = await postCamera(camera);
