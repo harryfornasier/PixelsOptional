@@ -27,7 +27,10 @@ export async function getComments(id) {
     const comments = await axios.get(`${import.meta.env.VITE_BASE_URL}/comments/${id}`);
     return comments;
   } catch (error) {
-    return error;
+    if (error.response && error.response.status === 404) {
+      console.clear();
+      return error;
+    }
   }
 }
 
