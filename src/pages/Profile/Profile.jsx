@@ -58,8 +58,6 @@ export default function Profile({ setLoggedIn }) {
       setPosts(data.posts);
       setUserCameras(response.data.cameras);
 
-      console.log(userCameras);
-
       for (let i = 0; i < options.length; i++) {
         if (options[i].icon === data.user.icon_url) {
           setSelectedOption(options[i]);
