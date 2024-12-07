@@ -1,16 +1,27 @@
 import heart from "../../assets/icons/heart.png";
 import comment from "../../assets/icons/comment.png";
-import axios from "axios";
 import { patchLike } from "../../utils/handleApi.jsx";
-import { useState } from "react";
 
-export default function CardDetails({ post, fetchPosts, setError }) {
+export default function CardDetails({ post, fetchPosts, setError, handlePostApi }) {
   const loggedUser = localStorage.getItem("userId");
+
   async function handleLike() {
-    const response = await patchLike(post.id, post.user_id);
+    let postId = 1;
+
+    if (post.id) {
+      postId = post.id;
+    } else {
+      postId = post.post_id;
+    }
+
+    const response = await patchLike(postId, post.user_id);
 
     if (response) {
-      fetchPosts();
+      if (fetchPosts) {
+        fetchPosts();
+      } else {
+        handlePostApi();
+      }
     } else {
       if (setError) {
         setError("You ain't logged in");
