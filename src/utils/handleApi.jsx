@@ -39,7 +39,6 @@ export async function sendComment(data) {
         authorisation: `Bearer ${authToken}`,
       },
     });
-    console.log(response);
     return response;
   } catch (error) {
     return error;

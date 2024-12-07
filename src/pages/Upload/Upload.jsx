@@ -46,7 +46,6 @@ export default function Upload() {
 
   function handleImage(event) {
     event.preventDefault();
-    console.log(event.target.files[0]);
     if (event.target.files[0].size > 4.5 * 1000 * 1024) {
       setError("File is too big");
     } else {
