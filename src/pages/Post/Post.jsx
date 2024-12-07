@@ -2,7 +2,7 @@ import Loading from "../../components/Loading/Loading";
 import { useParams } from "react-router";
 import { getPost } from "../../utils/handleApi";
 import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Comment from "../../components/Comment/Comment";
 import "./post.scss";
 import { sendComment } from "../../utils/handleApi";
@@ -18,7 +18,9 @@ export default function Post({ loggedIn }) {
   const [post, setPost] = useState("");
   const [comments, setComments] = useState("");
   const [postComment, setPostComment] = useState("");
+  const [landscape, setLandscape] = useState(true);
   const [error, setError] = useState("");
+  const imgEl = useRef(null);
 
   async function handleComment(event) {
     event.preventDefault();
@@ -53,10 +55,19 @@ export default function Post({ loggedIn }) {
   async function hanldePostApi() {
     const response = await getPost(id);
     setPost(response.data.post[0]);
+    if (post.landscape === true) {
+      setLandscape(true);
+    }
   }
 
   async function handleDelete() {
     const response = await deletePost(id);
+  }
+
+  function handleOrientation() {
+    if (imgEl.current.naturalHeight > imgEl.current.naturalWidth) {
+      setLandscape(false);
+    }
   }
 
   useEffect(() => {
@@ -70,11 +81,7 @@ export default function Post({ loggedIn }) {
 
   return (
     <main className="main">
-      <div
-        className={
-          post.orientation ? "post__border" : "post__border post__border--portrait"
-        }
-      >
+      <div className={landscape ? "post__border" : "post__border post__border--portrait"}>
         <section className="post">
           <div className="post__title-container">
             <h3 className="post__title">{post.title}</h3>
@@ -85,10 +92,10 @@ export default function Post({ loggedIn }) {
           {admin == 1 && <button onClick={handleDelete}>Delete</button>}
           <div className="post__image-container">
             <img
+              onLoad={handleOrientation}
+              ref={imgEl}
               loading="lazy"
-              className={
-                post.landscape ? "post__image" : "post__image post__image--portrait"
-              }
+              className={landscape ? "post__image" : "post__image post__image--portrait"}
               src={post.image_url}
               alt=""
             />
