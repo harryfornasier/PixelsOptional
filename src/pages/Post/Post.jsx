@@ -52,7 +52,7 @@ export default function Post({ loggedIn }) {
     }
   }
 
-  async function hanldePostApi() {
+  async function handlePostApi() {
     const response = await getPost(id);
     setPost(response.data.post[0]);
     if (post.landscape === true) {
@@ -71,7 +71,7 @@ export default function Post({ loggedIn }) {
   }
 
   useEffect(() => {
-    hanldePostApi();
+    handlePostApi();
     handleCommentApi();
   }, []);
 
@@ -100,7 +100,7 @@ export default function Post({ loggedIn }) {
               alt=""
             />
           </div>
-          <CardDetails setError={setError} post={post} />
+          <CardDetails handlePostApi={handlePostApi} setError={setError} post={post} />
         </section>
       </div>
       <div className="post__divider">
