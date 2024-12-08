@@ -22,6 +22,12 @@ Although it asks for an email when you sign up, there is currently no functional
 - **Frontend**: JavaScript, SCSS, Vite.js.
 - **Hosting**: Vercel.
 
+## Things I'd Like to Add
+
+Future ideas for improving PixelsOptional:
+- **Categories**: Allow users to filter photos by different categories for easier browsing.
+- **Monthly Competitions**: Introduce a feature where users can participate in monthly challenges by taking photos of the same theme. The photo with the most likes at the end of the month wins.
+
 ## Getting Started
 
 ### Prerequisites
