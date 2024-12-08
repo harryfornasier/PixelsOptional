@@ -12,7 +12,8 @@ Although it asks for an email when you sign up, there is currently no functional
 - Select your own user icon for your account
 - View posts made by other accounts
 
-  ### The like pot
+
+### The like pot
 
   The "pot" feature in your profile limits likes based on a "like pot." You can only like photos if you have likes in your pot, which decreases as you use them. Receiving likes refills your pot, so it never runs out. Received likes are visible to others and can only increase. Self-liking is not allowed. This system adds a strategic element to liking photos.
 
@@ -33,3 +34,9 @@ Ensure you have the following installed:
    ```bash
    git clone https://github.com/harryfornasier/PixelsOptional.git
    cd PixelsOptional
+
+
+## Unimplemented Features
+
+Some features are not yet implemented:
+- **Unlike Functionality**: Currently, you cannot unlike a photo after liking it.
