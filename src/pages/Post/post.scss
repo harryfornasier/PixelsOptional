@@ -36,6 +36,7 @@
     border-right: solid 5px #34332f;
     border-bottom: solid 5px #34332f;
     border-radius: 5px;
+    height: fit-content;
 
     @include desktop {
       width: 0%;
