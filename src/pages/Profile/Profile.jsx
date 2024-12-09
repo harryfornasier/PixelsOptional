@@ -120,11 +120,12 @@ export default function Profile({ setLoggedIn }) {
                     {selectedOption && <img src={selectedOption.icon} alt="" />}
                   </div>
                 </h1>
-                <button onClick={handleLogout}>Logout</button>
                 <p>Email: {userData.email}</p>
-
                 <p>Like Pot: {userData.pot}</p>
                 <p>Recieved Likes: {userData.likes}</p>
+                <button className="profile__logout" onClick={handleLogout}>
+                  Logout
+                </button>
               </div>
 
               <section className="profile__edit">
@@ -138,7 +139,7 @@ export default function Profile({ setLoggedIn }) {
                     components={{ Option: IconOption }}
                   />
                   <button onClick={handleIcon} className="select__submit">
-                    Submit
+                    Change Icon
                   </button>
                 </section>
               </section>
