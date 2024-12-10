@@ -47,6 +47,5 @@ Ensure you have the following installed:
 ## Unimplemented Features
 
 Some features are not yet implemented:
-- **Unlike Functionality**: Currently, you cannot unlike a photo after liking it.
 - **Delete Own Posts**: You can't delete your own posts.
 - **Delete Account**: You can't delete your account.
