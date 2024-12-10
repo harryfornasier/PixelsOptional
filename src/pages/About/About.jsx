@@ -15,7 +15,7 @@ export default function About() {
         How old does a digital camera have to be to be "retro"?
       </h3>
       <p className="about__text">
-        I'll leave this up for you to decide. But my feeling is that around 2011 is the
+        I'll leave this up for you to decide. But my feeling is that around 2005 is the
         cut-off.
       </p>
       <h3 className="about__subtitle">So I can just use a new camera?</h3>
