@@ -4,6 +4,7 @@ import bot from "../../assets/icons/bot.png";
 import { useNavigate } from "react-router";
 import Select from "react-select";
 import "./upload.scss";
+import { getCompetitionsCurrent } from "../../utils/handleApi";
 
 export default function Upload() {
   const [image, setImage] = useState("");
@@ -12,6 +13,8 @@ export default function Upload() {
   const [error, setError] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
   const [options, setOptions] = useState(null);
+  const [competitionOptions, setCompetitionOptions] = useState(null);
+  const [selectedCompetition, setSelectedCompetition] = useState(null);
   const [portrait, setPortrait] = useState(false);
   const imgEl = useRef(null);
 
@@ -31,6 +34,7 @@ export default function Upload() {
       formData.append("image", image);
       formData.append("title", title);
       formData.append("camera_id", selectedOption.value);
+      formData.append("competition", selectedCompetition.value);
       const response = await postData(formData);
       setTitle("");
 
@@ -74,8 +78,26 @@ export default function Upload() {
       setOptions(null);
     }
   }
+
+  async function getCompetitions() {
+    const response = await getCompetitionsCurrent();
+    const competitionsArray = [];
+    const competitions = response.data.competitions;
+
+    if (competitions.length) {
+      competitions.forEach((competition) => {
+        competitionsArray.push({
+          value: competition.id,
+          label: competition.name,
+        });
+      });
+      setCompetitionOptions(competitionsArray);
+    }
+  }
+
   useEffect(() => {
     getCameras();
+    getCompetitions();
   }, []);
 
   return (
@@ -108,6 +130,8 @@ export default function Upload() {
             options={options}
             onChange={setSelectedOption}
           />
+          <label className="form__label">Competition:</label>
+          <Select options={competitionOptions} onChange={setSelectedCompetition} />
           <button className="form__button form__button--desktop" onClick={handleFormData}>
             Upload
           </button>

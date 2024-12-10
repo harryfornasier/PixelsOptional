@@ -72,7 +72,9 @@ export default function Login({ setLoggedIn }) {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <button className="form__button">Login</button>
+        <button type="submit" className="form__button">
+          Login
+        </button>
         {errorMessage && <p>{errorMessage}</p>}
         {success && <p>Success! You can now access the profile page.</p>}
       </form>

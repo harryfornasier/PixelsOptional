@@ -5,13 +5,14 @@ export async function getData(endpoint) {
   return response.data;
 }
 
-export async function getPosts(pageNum) {
+export async function getPosts(pageNum, competition) {
   const userId = localStorage.getItem("userId");
 
   const posts = await axios.get(`${import.meta.env.VITE_BASE_URL}/posts`, {
     params: {
       page: pageNum,
       userId: userId,
+      competitionId: competition ? competition.value : "",
     },
   });
   return posts.data;
@@ -158,6 +159,15 @@ export async function getCamerasByUsername(userId) {
     const response = await axios.get(
       `${import.meta.env.VITE_BASE_URL}/cameras/${userId}`
     );
+    return response;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function getCompetitionsCurrent() {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/competitions`);
     return response;
   } catch (error) {
     return error;

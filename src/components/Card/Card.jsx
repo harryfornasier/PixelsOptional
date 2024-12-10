@@ -5,6 +5,8 @@ import CardDetails from "../CardDetails/CardDetails";
 
 export default function Card({ post, fetchPosts, userView }) {
   const timeStampPattern = /(\d{4})-(\d{2})-(\d{2})T.*$/;
+
+  console.log(post);
   return (
     <div className="card__border">
       <section className="card">
@@ -26,6 +28,12 @@ export default function Card({ post, fetchPosts, userView }) {
               <img className="icon" src={post.icon_url} alt="" />
             </div>
             <Link to={`/profile/${post.user_id}`}>{post.name}</Link>
+          </div>
+        )}
+
+        {post.competition_name && (
+          <div className="competition">
+            <p>{post.competition_name}</p>
           </div>
         )}
         <CardDetails fetchPosts={fetchPosts} post={post} />
