@@ -18,6 +18,23 @@ export default function CreateCompetition() {
         setError("You must be logged in to view this page");
         setIsLoading(false);
       }
+      if (error.status === 403) {
+        setError("You are not authorised to view this page");
+        setIsLoading(false);
+      }
     }
   };
+
+  return (
+    <main>
+      {isLoading && <Loading />}
+      {!isLoading && !error && (
+        <>
+          <h1>Create</h1>
+          <p>d</p>
+        </>
+      )}
+      {error && <p>{error}</p>}
+    </main>
+  );
 }
