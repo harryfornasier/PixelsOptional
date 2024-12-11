@@ -5,8 +5,6 @@ import CardDetails from "../CardDetails/CardDetails";
 
 export default function Card({ post, fetchPosts, userView }) {
   const timeStampPattern = /(\d{4})-(\d{2})-(\d{2})T.*$/;
-
-  console.log(post);
   return (
     <div className="card__border">
       <section className="card">

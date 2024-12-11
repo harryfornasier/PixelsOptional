@@ -16,11 +16,14 @@ export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [competitionOptions, setCompetitionOptions] = useState(null);
   const [selectedCompetition, setSelectedCompetition] = useState(null);
+  const [sort, setSort] = useState(null);
+  const [descriptions, setDescriptions] = useState(null);
 
   const fetchPosts = async () => {
     setSearchParams({
       page: page,
       filter: selectedCompetition ? selectedCompetition.label : "none",
+      sort: sort ? sort : "dsc",
     });
     const response = await getPosts(searchParams.get("page"), selectedCompetition);
     setPosts(response);
@@ -31,11 +34,13 @@ export default function Home() {
     const competitionsArray = [];
     const competitions = response.data.competitions;
 
+    setDescriptions(competitions.descriptions);
     if (competitions.length) {
       competitions.forEach((competition) => {
         competitionsArray.push({
           value: competition.id,
           label: competition.name,
+          description: competition.description,
         });
       });
       setCompetitionOptions(competitionsArray);
@@ -62,6 +67,13 @@ export default function Home() {
           searchParams={searchParams}
         />
         <Select options={competitionOptions} onChange={setSelectedCompetition}></Select>
+        <div className="competition__description">
+          {selectedCompetition ? (
+            <p>{selectedCompetition.description && selectedCompetition.description}</p>
+          ) : (
+            <p>Select a competition to filter by</p>
+          )}
+        </div>
       </section>
       <ResponsiveMasonry columnsCountBreakPoints={{ 320: 1, 750: 2, 900: 3 }}>
         <Masonry>

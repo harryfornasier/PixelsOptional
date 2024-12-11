@@ -12,6 +12,7 @@ import Profile from "./pages/Profile/Profile.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import ProfileView from "./pages/ProfileView/ProfileView.jsx";
 import About from "./pages/About/About.jsx";
+import CreateCompetition from "./pages/CreateCompetition/CreateCompetition.jsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -37,6 +38,7 @@ function App() {
           <Route path="/users/register" element={<Register />} />
           <Route path="/profile" element={<Profile setLoggedIn={setLoggedIn} />} />
           <Route path="/profile/:id" element={<ProfileView />}></Route>
+          <Route path="/competition" element={<CreateCompetition />}></Route>
         </Routes>
       </BrowserRouter>
     </>
