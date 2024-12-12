@@ -47,6 +47,11 @@ export default function Home() {
     }
   }
 
+  async function clearFilter() {
+    setSort(null);
+    setSelectedCompetition(null);
+  }
+
   useEffect(() => {
     fetchPosts();
     getCompetitions();
@@ -66,7 +71,13 @@ export default function Home() {
           fetchPosts={fetchPosts}
           searchParams={searchParams}
         />
-        <Select options={competitionOptions} onChange={setSelectedCompetition}></Select>
+        <Select
+          options={competitionOptions}
+          value={selectedCompetition || ""}
+          key={`my_unique_select_key__${selectedCompetition}`}
+          onChange={setSelectedCompetition}
+        />
+        <button onClick={clearFilter}>Clear</button>
         <div className="competition__description">
           {selectedCompetition ? (
             <p>{selectedCompetition.description && selectedCompetition.description}</p>
