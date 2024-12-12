@@ -24,11 +24,13 @@ export async function getPost(id) {
 
 export async function getComments(id) {
   try {
-    const comments = await axios.get(`${import.meta.env.VITE_BASE_URL}/comments/${id}`);
+    const comments = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/posts/${id}/comments`
+    );
     return comments;
   } catch (error) {
     if (error.response && error.response.status === 404) {
-      console.clear();
+      //console.clear();
       return error;
     }
   }
@@ -37,11 +39,15 @@ export async function getComments(id) {
 export async function sendComment(data) {
   const authToken = localStorage.getItem("authToken");
   try {
-    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/comments`, data, {
-      headers: {
-        authorisation: `Bearer ${authToken}`,
-      },
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/posts/${data.postId}/comments`,
+      data,
+      {
+        headers: {
+          authorisation: `Bearer ${authToken}`,
+        },
+      }
+    );
     return response;
   } catch (error) {
     return error;
@@ -75,7 +81,7 @@ export async function patchLike(postId, foreignUserId) {
       return false;
     }
     const response = await axios.patch(
-      `${import.meta.env.VITE_BASE_URL}/posts/${postId}`,
+      `${import.meta.env.VITE_BASE_URL}/posts/${postId}/likes`,
       { foreignUser: foreignUserId },
       {
         headers: {
@@ -122,13 +128,10 @@ export async function deleteComment(postId, id) {
   const authToken = localStorage.getItem("authToken");
 
   const response = await axios.delete(
-    `${import.meta.env.VITE_BASE_URL}/comments/${postId}`,
+    `${import.meta.env.VITE_BASE_URL}/posts/${postId}/comments/${id}`,
     {
       headers: {
         authorisation: `Bearer ${authToken}`,
-      },
-      data: {
-        commentId: id,
       },
     }
   );
